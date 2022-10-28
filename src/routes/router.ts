@@ -9,7 +9,7 @@ import countryRoutes from './country.routes';
  */
 const router = (app: Express) => {
 	app.use(indexRoutes);
-	app.use('/countries', countryRoutes)
+	app.use('/countries', countryRoutes);
 };
 
 export default router;

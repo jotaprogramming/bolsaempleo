@@ -1,9 +1,9 @@
-import prisma from "../config/db"
+import prisma from '../config/db';
 
 class CountriesRepository {
-   async getAll(){
-      return await prisma.countries.findMany()
-   }
+	async getAll() {
+		return await prisma.countries.findMany();
+	}
 }
 
 export default new CountriesRepository();
