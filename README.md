@@ -18,6 +18,45 @@ Juan Rincón
 
 ## Commands
 
+### Server
+
+Transpiling code:
+```bash
+npm run build
+```
+
+Transpiling with errors:
+```bash
+npm run test
+```
+
+Development server up:
+```bash
+npm run dev
+```
+
+Development server watching:
+```bash
+npm run watch
+```
+
+Production server up:
+```bash
+npm run start
+```
+
+### Prisma
+
+Load the schematics:
+```bash
+npx prisma db pull
+```
+
+Generate Prisma Client:
+```bash
+npx prisma generate
+```
+
 ### Prettier
 
 Format all code:
