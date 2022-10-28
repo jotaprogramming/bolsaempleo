@@ -1,0 +1,13 @@
+# Ignore artifacts:
+build
+prisma
+database
+node_modules
+package-lock.json
+package.json
+tsconfig.json
+README.md
+en-README.md
+es-README.md
+.env
+.gitignore

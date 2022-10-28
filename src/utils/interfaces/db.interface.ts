@@ -1,3 +1,3 @@
-export interface IORM <TORM> {
-    readonly orm:TORM
+export interface IORM<TORM> {
+	readonly orm: TORM;
 }
