@@ -25,7 +25,7 @@ Transpiling code:
 npm run build
 ```
 
-Transpiling with errors:
+Server up regardless of errors:
 ```bash
 npm run test
 ```
