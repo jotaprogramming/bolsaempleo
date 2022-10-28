@@ -81,12 +81,6 @@ model contract_types {
   offers  offers[]
 }
 
-model country {
-  cntr_id   Int        @id @default(autoincrement())
-  cntr_name String     @db.VarChar(40)
-  district  district[]
-}
-
 model currencies {
   crr_id  Int      @id @default(autoincrement())
   crr_iso String   @db.VarChar(3)
@@ -103,10 +97,10 @@ model curriculum {
 }
 
 model district {
-  dis_id         Int      @id @default(autoincrement())
-  dis_name       String   @db.VarChar(50)
+  dis_id         Int       @id @default(autoincrement())
+  dis_name       String    @db.VarChar(50)
   dis_country_id Int
-  country        country  @relation(fields: [dis_country_id], references: [cntr_id], onDelete: Cascade, map: "fk_dis_country_id")
+  countries      countries @relation(fields: [dis_country_id], references: [cntr_id], onDelete: Cascade, map: "fk_dis_country_id")
   cities         cities[]
 
   @@index([dis_country_id], map: "fk_dis_country_id")
@@ -293,6 +287,12 @@ model workday {
   wd_id   Int      @id @default(autoincrement())
   wd_name String   @db.VarChar(50)
   offers  offers[]
+}
+
+model countries {
+  cntr_id   Int        @id @default(autoincrement())
+  cntr_name String     @db.VarChar(40)
+  district  district[]
 }
 
 enum candidatures_cdt_status {

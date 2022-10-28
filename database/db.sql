@@ -3,9 +3,9 @@ CREATE DATABASE jobcenter;
 
 USE jobcenter;
 
-DROP TABLE IF EXISTS country;
+DROP TABLE IF EXISTS countries;
 
-CREATE TABLE country(
+CREATE TABLE countries(
     cntr_id INT PRIMARY KEY AUTO_INCREMENT,
     cntr_name VARCHAR(40) NOT NULL COMMENT 'Name of country'
 );
@@ -16,7 +16,7 @@ CREATE TABLE district(
     dis_id INT PRIMARY KEY AUTO_INCREMENT,
     dis_name VARCHAR(50) NOT NULL COMMENT 'Name of the administrative district',
     dis_country_id INT NOT NULL COMMENT 'Country of administrative district',
-    CONSTRAINT `fk_dis_country_id` FOREIGN KEY (dis_country_id) REFERENCES country (cntr_id) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `fk_dis_country_id` FOREIGN KEY (dis_country_id) REFERENCES countries (cntr_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS cities;
