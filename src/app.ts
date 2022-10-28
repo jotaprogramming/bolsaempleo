@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import path from 'path';
+import router from './routes/router';
 import config from './config.env';
 
 abstract class App {
@@ -14,6 +15,7 @@ abstract class App {
         this._app.use(morgan('dev'));
         this._app.use(express.urlencoded({ extended: false }));
         this._app.use(express.json());
+        router(this._app);
     }
 
     get app(): Express {
