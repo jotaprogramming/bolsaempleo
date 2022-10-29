@@ -107,7 +107,7 @@ dist
 database/
 
 # Ilustrations
-drawings/
+drawings/MVC.drawio
 
 # Temporal
 src/tests/
