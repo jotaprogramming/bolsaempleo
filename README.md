@@ -8,6 +8,7 @@ date: "2022-30-10"
 
 # :book: Job board
 
+![Depfu](https://img.shields.io/depfu/jotaprogramming/bolsaempleo)
 [![doc_in_english](https://img.shields.io/badge/Project_documentation-English-blue)](en-README.md)
 [![doc_in_spanish](https://img.shields.io/badge/Documentación_del_proyecto-Español-orange)](es-README.md)
 
@@ -29,9 +30,8 @@ Juan Rincón
   - [Members](#members)
   - [Table of Contents](#table-of-contents)
   - [Development guide](#development-guide)
-  - [Dependencies](#dependencies)
     - [Folder structure](#folder-structure)
-    - [Modules](#modules)
+  - [Dependencies](#dependencies)
   - [Commands](#commands)
     - [Server](#server)
     - [Prisma](#prisma)
@@ -39,12 +39,6 @@ Juan Rincón
   - [External links](#external-links)
 
 ## Development guide
-
-## Dependencies
-
-[![express](https://img.shields.io/badge/Express-v4.18.2-yellow)](https://github.com/expressjs/express)
-[![ejs](https://img.shields.io/badge/EJS-v3.1.8-green)](https://github.com/expressjs/express)
-[![prisma](https://img.shields.io/badge/PrismaClient-v4.5.0-blue)](https://github.com/prisma/prisma)
 
 ### Folder structure
 
@@ -91,9 +85,11 @@ src ────┐
         └── index.ts #Server
 ```
 
-### Modules
+## Dependencies
 
-[![alt](https://img.shields.io/badge/Express-%5E4.18.2-yellow)](https://expressjs.com/)
+[![express](https://img.shields.io/badge/Express-v4.18.2-yellow)](https://github.com/expressjs/express)
+[![ejs](https://img.shields.io/badge/EJS-v3.1.8-green)](https://github.com/expressjs/express)
+[![prisma](https://img.shields.io/badge/PrismaClient-v4.5.0-blue)](https://github.com/prisma/prisma)
 
 ## Commands
 
