@@ -1,0 +1,282 @@
+$primary-orange:#F4893C;
+$black-letter:#0F0F0F;
+$extraligth-gray:#D7D7D7;
+$gray-letter:#6F6F6F;
+$primary-red:#D84B4B;
+$white-letter:#FFF;
+$border: 1px solid #b62f2f;
+$secundary-orange:#FF5C16;
+
+html{
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+    *,
+    *::after,
+    *::before{
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
+    }
+}
+
+/*--------------------------MOBILE--------------------------*/
+body{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas: 
+    "header" 
+    "container";
+}
+.header{
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $extraligth-gray;
+    &__brand{
+        background-color: $primary-orange;
+        min-width: 240px;
+        width: 16%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__logo{
+            width: 90%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &__text{
+                text-align: center;
+                padding: 16px;
+                color: $white-letter;
+            }
+        }
+    }
+    &__nav{
+        max-width:1024px;
+        width: 100%;
+        height: 100%;
+        display: none;
+    }
+    &__tail{
+        height: 100%;
+        min-width: 100px;
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__icon{
+            width: 100%;
+            height: 100%;
+            text-align: right;
+        }
+    }
+}
+.container{
+    grid-area: container;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 93.5vh;
+    
+    &__card{
+        width: 80%;
+        height: 90%;
+        border: 1px solid $extraligth-gray;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__aside{
+            display: none;
+        }
+        &__form{
+            width: 85%;
+            height: 90%;
+            display: flex;
+            flex-direction:column;
+            align-items: center;
+            justify-content: center;
+            &__header{
+                //background-color: rgb(196, 224, 178);
+                width: 100%;
+                height: 25%;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                &__title{
+                    font-size: 32px;
+                    font-weight: 500;
+                    line-height: 40px;
+                }
+                &__subtitle{
+                    margin-top: 2px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 20px;
+                }
+
+            }
+            &__body{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                //background-color: rgb(201, 178, 224);
+                //border: 1px solid black;
+                width: 100%;
+                height: 45%;
+                &__text{
+                    color:$black-letter;
+                    font-weight: 300;
+                    font-size: 15px;
+                    line-height: 15px;
+                }
+                &__inputs{
+                    margin-top: 10px;
+                    width: 100%;
+                    height: 50px;
+                    .inputss{
+                        width: 100%;
+                        height: 40px;
+                        border: 1px solid $extraligth-gray;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 10px;
+                
+                        .box{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            .icon{
+                                svg{
+                                    width: 100%;
+                                    height: 100%;
+                                    border-top-left-radius: 10px;
+                                    border-bottom-left-radius: 10px;
+                                    fill: #000;
+                                }
+                            }
+                            .input{
+                                display: flex;
+                                width: 80%;
+                                height: 95%;
+                                justify-content: center;
+                                align-items: center;
+                             
+                                .user{
+                                    width: 100%;
+                                    border: none;
+                                    height: 90%;
+                                    border-left:1px solid $extraligth-gray ;
+                                    &:focus,
+                                    &:active{
+                                        outline: none;
+                                        text-align: center;
+                                    }
+                                    &::placeholder{
+                                        padding: 10px;
+                                        font-family: 'Quicksand', sans-serif;
+                                    }
+                                }
+                
+                            }
+                            &:hover{
+                                .icon{
+                                    background-color: #F4893C;
+                                    stroke: #fff;
+                                    border-top-left-radius: 10px;
+                                    border-bottom-left-radius: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+                &__btn{
+                    margin-top: 40px;
+                    width: 100%;
+                    height: 40px;
+                    .buttom{
+                        width: 100%;
+                        height: 30px;
+                        &__default{
+                            width: 100%;
+                            border-radius: 20px;
+                            border: none;
+                            height: 100%;
+                            background-color: $primary-orange;
+                            color: #FFF;
+                            &:hover{
+                                background-color: $secundary-orange;
+                         
+                            }  
+                        }
+                    }
+                }
+            }
+            &__footer{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                //background-color: rgb(122, 80, 121);
+                width: 100%;
+                height: 25%;
+                &__text{
+                    text-align: center;
+                    color:$black-letter;
+                    font-weight: 300;
+                    font-size: 15px;
+                    line-height: 15px;
+                    a{
+                        color: $black-letter;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*--------------------------DESKTOP-------------------------*/
+@media screen and (min-width:1024px){
+    .container{
+       &__card{
+        width: 70%;
+        height: 80%;
+        display: grid;
+        grid-template-columns: 50% 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 
+        "aside form"
+        "aside form";
+        &__aside{
+            grid-area: aside;
+            width: 100%;
+            height: 100%;
+            display: block;
+            &__figure{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-top-left-radius:10px ;
+                border-bottom-left-radius:10px ;
+                
+            }
+        }
+        &__form{
+            width: 100%;
+            height: 100%;
+            grid-area: form;
+
+            &__body{
+                max-width: 60%;
+            }
+            
+        }
+       }
+    }
+    
+}
