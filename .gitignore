@@ -102,3 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Database
+# database
+
+# Ilustrations
+drawings/MVC.drawio
+
+# Temporal
+src/tests/
