@@ -4,16 +4,12 @@ pageTitle: Web portal of a job board
 metaDescription: Web portal of a job board as a degree project
 author: "Jerson Guerrero"
 date: "2022-30-10"
-output: 
-  html_document:
-     css: 
-     self_contained: no
 ---
 
-# Job board
+# :book: Job board
 
-Document in [English](en-README.md)\
-Documento en [Español](es-README.md)
+[![doc_in_english](https://img.shields.io/badge/Project_documentation-English-blue)](en-README.md)
+[![doc_in_spanish](https://img.shields.io/badge/Documentación_del_proyecto-Español-orange)](es-README.md)
 
 ## Summary
 
@@ -28,12 +24,12 @@ Juan Rincón
 
 ## Table of Contents
 
-- [Job board](#job-board)
+- [:book: Job board](#book-job-board)
   - [Summary](#summary)
   - [Members](#members)
   - [Table of Contents](#table-of-contents)
   - [Development guide](#development-guide)
-    - [MVC Diagram](#mvc-diagram)
+  - [Dependencies](#dependencies)
     - [Folder structure](#folder-structure)
     - [Modules](#modules)
   - [Commands](#commands)
@@ -44,9 +40,11 @@ Juan Rincón
 
 ## Development guide
 
-### MVC Diagram
+## Dependencies
 
-![mvc](./drawings/MVC.svg)
+[![express](https://img.shields.io/badge/Express-v4.18.2-yellow)](https://github.com/expressjs/express)
+[![ejs](https://img.shields.io/badge/EJS-v3.1.8-green)](https://github.com/expressjs/express)
+[![prisma](https://img.shields.io/badge/PrismaClient-v4.5.0-blue)](https://github.com/prisma/prisma)
 
 ### Folder structure
 
