@@ -1,9 +1,9 @@
-export interface IDBCountries {
+export interface IDBCountry {
 	cntr_id?: number;
 	cntr_name: string;
 }
 
-export interface ICountries {
+export interface ICountry {
 	id?: number;
 	name: string;
 }

@@ -68,6 +68,7 @@ model contact_sn {
   csn_id          Int             @id @default(autoincrement())
   csn_con_id      Int
   csn_sn_id       Int
+  csn_path        String          @db.VarChar(255)
   contact         contact         @relation(fields: [csn_con_id], references: [con_id], onDelete: Cascade, map: "fk_csn_con_id")
   social_networks social_networks @relation(fields: [csn_sn_id], references: [sn_id], onDelete: Cascade, map: "fk_csn_sn_id")
 
@@ -77,13 +78,13 @@ model contact_sn {
 
 model contract_types {
   ct_id   Int      @id @default(autoincrement())
-  ct_name String   @db.VarChar(100)
+  ct_name String   @unique(map: "ct_name") @db.VarChar(100)
   offers  offers[]
 }
 
 model currencies {
   crr_id  Int      @id @default(autoincrement())
-  crr_iso String   @db.VarChar(3)
+  crr_iso String   @unique(map: "crr_iso") @db.VarChar(3)
   offers  offers[]
 }
 
@@ -132,11 +133,11 @@ model headquarters {
   hq_id         Int         @id @default(autoincrement())
   hq_address    String      @db.VarChar(100)
   hq_cty_id     Int
-  hq_con_id     Int
+  hq_con_id     Int?
   hq_created_at DateTime    @default(now()) @db.Timestamp(0)
   hq_updated_at DateTime?   @db.Timestamp(0)
   hq_deleted_at DateTime?   @db.Timestamp(0)
-  contact       contact     @relation(fields: [hq_con_id], references: [con_id], onDelete: Cascade, map: "fk_hq_con_id")
+  contact       contact?    @relation(fields: [hq_con_id], references: [con_id], onDelete: Cascade, map: "fk_hq_con_id")
   cities        cities      @relation(fields: [hq_cty_id], references: [cty_id], onDelete: Cascade, map: "fk_hq_cty_id")
   graduates     graduates[]
 
@@ -232,21 +233,20 @@ model roles_restrictions {
 
 model social_networks {
   sn_id      Int          @id @default(autoincrement())
-  sn_name    String       @db.VarChar(100)
-  sn_path    Int
+  sn_name    String       @unique(map: "sn_name") @db.VarChar(100)
   sn_icon    Bytes        @db.TinyBlob
   contact_sn contact_sn[]
 }
 
 model tags {
   tag_id      Int           @id @default(autoincrement())
-  tag_name    String        @db.VarChar(100)
+  tag_name    String        @unique(map: "tag_name") @db.VarChar(100)
   offers_tags offers_tags[]
 }
 
 model users {
   usr_id          Int               @id @default(autoincrement())
-  username        String            @db.VarChar(50)
+  username        String            @unique(map: "username") @db.VarChar(50)
   password        String            @db.VarChar(255)
   about_me        String?           @db.VarChar(255)
   usr_rol_id      Int
@@ -285,13 +285,13 @@ model users_graduates {
 
 model workday {
   wd_id   Int      @id @default(autoincrement())
-  wd_name String   @db.VarChar(50)
+  wd_name String   @unique(map: "wd_name") @db.VarChar(50)
   offers  offers[]
 }
 
 model countries {
   cntr_id   Int        @id @default(autoincrement())
-  cntr_name String     @db.VarChar(40)
+  cntr_name String     @unique(map: "cntr_name") @db.VarChar(40)
   district  district[]
 }
 

@@ -17,3 +17,7 @@ export interface IUpdate<TRequest, TResponse> {
 export interface IDelete<TRequest, TResponse> {
 	delete(req: TRequest, res: TResponse): Promise<void>;
 }
+
+export interface IDestroy<TRequest, TResponse> {
+	destroy(req: TRequest, res: TResponse): Promise<void>;
+}

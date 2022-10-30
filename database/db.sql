@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS countries;
 
 CREATE TABLE countries(
     cntr_id INT PRIMARY KEY AUTO_INCREMENT,
-    cntr_name VARCHAR(40) NOT NULL COMMENT 'Name of country'
+    cntr_name VARCHAR(40) NOT NULL COMMENT 'Name of country' UNIQUE
 );
 
 DROP TABLE IF EXISTS district;
@@ -32,14 +32,14 @@ DROP TABLE IF EXISTS tags;
 
 CREATE TABLE tags(
     tag_id INT PRIMARY KEY AUTO_INCREMENT,
-    tag_name VARCHAR(100) NOT NULL
+    tag_name VARCHAR(100) NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS contract_types;
 
 CREATE TABLE contract_types(
     ct_id INT PRIMARY KEY AUTO_INCREMENT,
-    ct_name VARCHAR(100) NOT NULL
+    ct_name VARCHAR(100) NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS legal_representative;
@@ -87,14 +87,14 @@ DROP TABLE IF EXISTS currencies;
 
 CREATE TABLE currencies(
     crr_id INT PRIMARY KEY AUTO_INCREMENT,
-    crr_iso VARCHAR(3) NOT NULL COMMENT 'ISO 4217 currency code'
+    crr_iso VARCHAR(3) NOT NULL COMMENT 'ISO 4217 currency code' UNIQUE
 );
 
 DROP TABLE IF EXISTS workday;
 
 CREATE TABLE workday(
     wd_id INT PRIMARY KEY AUTO_INCREMENT,
-    wd_name VARCHAR(50) NOT NULL
+    wd_name VARCHAR(50) NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS offers;
@@ -135,8 +135,7 @@ DROP TABLE IF EXISTS social_networks;
 
 CREATE TABLE social_networks(
     sn_id INT PRIMARY KEY AUTO_INCREMENT,
-    sn_name VARCHAR(100) NOT NULL,
-    sn_path INT NOT NULL COMMENT 'Social network profile path',
+    sn_name VARCHAR(100) NOT NULL UNIQUE,
     sn_icon TINYBLOB NOT NULL COMMENT 'Social network icon'
 );
 
@@ -155,6 +154,7 @@ CREATE TABLE contact_sn(
     csn_id INT PRIMARY KEY AUTO_INCREMENT,
     csn_con_id INT NOT NULL COMMENT 'Contact Id',
     csn_sn_id INT NOT NULL COMMENT 'Social Network Id',
+    csn_path VARCHAR(255) NOT NULL COMMENT 'Social network profile path',
     CONSTRAINT `fk_csn_con_id` FOREIGN KEY (csn_con_id) REFERENCES contact (con_id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_csn_sn_id` FOREIGN KEY (csn_sn_id) REFERENCES social_networks (sn_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -165,7 +165,7 @@ CREATE TABLE headquarters(
     hq_id INT PRIMARY KEY AUTO_INCREMENT,
     hq_address VARCHAR(100) NOT NULL,
     hq_cty_id INT NOT NULL COMMENT 'City Id',
-    hq_con_id INT NOT NULL COMMENT 'Contact Id',
+    hq_con_id INT NULL COMMENT 'Contact Id',
     hq_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     hq_updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     hq_deleted_at TIMESTAMP NULL,
@@ -234,7 +234,7 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
     usr_id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     about_me VARCHAR(255) NULL,
     usr_rol_id INT NOT NULL COMMENT 'Role Id',

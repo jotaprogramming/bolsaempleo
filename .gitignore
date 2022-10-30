@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # Database
-database/
+# database
 
 # Ilustrations
 drawings/MVC.drawio

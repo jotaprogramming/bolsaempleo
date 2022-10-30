@@ -39,6 +39,7 @@ Juan Rincón
 ```bash
 .
 ├── build #Source code transpiled to JavaScript
+├── drawings #Figures and illustrations for documentation
 ├── node_modules #NodeJs Modules [ignore by GIT]
 ├── prisma #Prism Schematic
 ├── public #Static files that will not be transpiled to JavaScript
@@ -62,13 +63,16 @@ public ─┐
 ```
 ```bash
 src ────┐
+        ├── components #Independent and reusable code fragments
         ├── config #Configuration files
         ├── controllers #Route controllers and intermediary between models and views
+        ├── interfaces #Mandatory contracts to be implemented
         ├── middlewares #Access functions to request and response objects
         ├── models #Business logic
         ├── repositories #Repository pattern for accessing data
         ├── routes #Routing
-        ├── tests #unit and integration testing
+        ├── settings #Application features, settings or options
+        ├── tests #Unit and integration testing
         ├── utils #Utility functions
         ├── views #Pages and partitions following EJS structure
         ├── app.ts #Express App
