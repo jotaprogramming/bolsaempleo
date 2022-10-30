@@ -1,7 +1,15 @@
-# Jobcenter
+---
+TOCTitle: "Job board"
+pageTitle: Web portal of a job board
+metaDescription: Web portal of a job board as a degree project
+author: "Jerson Guerrero"
+date: "2022-30-10"
+---
 
-Document in [English](en-README.md)\
-Documento en [Español](es-README.md)
+# :book: Job board
+
+[![doc_in_english](https://img.shields.io/badge/Project_documentation-English-blue)](en-README.md)
+[![doc_in_spanish](https://img.shields.io/badge/Documentación_del_proyecto-Español-orange)](es-README.md)
 
 ## Summary
 
@@ -16,23 +24,27 @@ Juan Rincón
 
 ## Table of Contents
 
-- [Jobcenter](#jobcenter)
+- [:book: Job board](#book-job-board)
   - [Summary](#summary)
   - [Members](#members)
   - [Table of Contents](#table-of-contents)
   - [Development guide](#development-guide)
-    - [MVC Diagram](#mvc-diagram)
+  - [Dependencies](#dependencies)
     - [Folder structure](#folder-structure)
+    - [Modules](#modules)
   - [Commands](#commands)
     - [Server](#server)
     - [Prisma](#prisma)
     - [Prettier](#prettier)
+  - [External links](#external-links)
 
 ## Development guide
 
-### MVC Diagram
+## Dependencies
 
-![mvc](./drawings/MVC.svg)
+[![express](https://img.shields.io/badge/Express-v4.18.2-yellow)](https://github.com/expressjs/express)
+[![ejs](https://img.shields.io/badge/EJS-v3.1.8-green)](https://github.com/expressjs/express)
+[![prisma](https://img.shields.io/badge/PrismaClient-v4.5.0-blue)](https://github.com/prisma/prisma)
 
 ### Folder structure
 
@@ -78,6 +90,10 @@ src ────┐
         ├── app.ts #Express App
         └── index.ts #Server
 ```
+
+### Modules
+
+[![alt](https://img.shields.io/badge/Express-%5E4.18.2-yellow)](https://expressjs.com/)
 
 ## Commands
 
@@ -142,3 +158,9 @@ or
 ```bash
 npx prettier --write <folder>/<file>
 ```
+
+## External links
+
+[Error message reference - Prisma](https://www.prisma.io/docs/reference/api-reference/error-reference)
+
+[HTTP Response status code - MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
