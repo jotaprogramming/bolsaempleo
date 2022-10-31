@@ -1,0 +1,309 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model candidatures {
+  cdt_id         Int                      @id @default(autoincrement())
+  cdt_ofr_id     Int
+  cdt_grd_ced    Int
+  cdt_status     candidatures_cdt_status?
+  cdt_created_at DateTime                 @default(now()) @db.Timestamp(0)
+  cdt_updated_at DateTime?                @db.Timestamp(0)
+  cdt_deleted_at DateTime?                @db.Timestamp(0)
+  graduates      graduates                @relation(fields: [cdt_grd_ced], references: [grd_ced], onDelete: Cascade, map: "fk_cdt_grd_ced")
+  offers         offers                   @relation(fields: [cdt_ofr_id], references: [ofr_id], onDelete: Cascade, map: "fk_cdt_ofr_id")
+
+  @@index([cdt_grd_ced], map: "fk_cdt_grd_ced")
+  @@index([cdt_ofr_id], map: "fk_cdt_ofr_id")
+}
+
+model cities {
+  cty_id          Int            @id @default(autoincrement())
+  cty_name        String         @db.VarChar(50)
+  cty_district_id Int
+  district        district       @relation(fields: [cty_district_id], references: [dis_id], onDelete: Cascade, map: "fk_cty_district_id")
+  companies       companies[]
+  graduates       graduates[]
+  headquarters    headquarters[]
+
+  @@index([cty_district_id], map: "fk_cty_district_id")
+}
+
+model companies {
+  com_nit              Int                  @id
+  com_name             String               @db.VarChar(100)
+  com_address          String               @db.VarChar(100)
+  com_hr_id            Int
+  com_lg_id            Int
+  com_cty_id           Int
+  com_created_at       DateTime             @default(now()) @db.Timestamp(0)
+  com_updated_at       DateTime?            @db.Timestamp(0)
+  com_deleted_at       DateTime?            @db.Timestamp(0)
+  cities               cities               @relation(fields: [com_cty_id], references: [cty_id], onDelete: NoAction, map: "fk_com_cty_id")
+  human_resources      human_resources      @relation(fields: [com_hr_id], references: [hr_id], onDelete: NoAction, map: "fk_com_hr_id")
+  legal_representative legal_representative @relation(fields: [com_lg_id], references: [lg_id], onDelete: NoAction, map: "fk_com_lg_id")
+  offers               offers[]
+  users_companies      users_companies[]
+
+  @@index([com_cty_id], map: "fk_com_cty_id")
+  @@index([com_hr_id], map: "fk_com_hr_id")
+  @@index([com_lg_id], map: "fk_com_lg_id")
+}
+
+model contact {
+  con_id        Int            @id @default(autoincrement())
+  con_email     String         @db.VarChar(100)
+  con_phone     Int
+  con_telephone Int
+  contact_sn    contact_sn[]
+  headquarters  headquarters[]
+}
+
+model contact_sn {
+  csn_id          Int             @id @default(autoincrement())
+  csn_con_id      Int
+  csn_sn_id       Int
+  csn_path        String          @db.VarChar(255)
+  contact         contact         @relation(fields: [csn_con_id], references: [con_id], onDelete: Cascade, map: "fk_csn_con_id")
+  social_networks social_networks @relation(fields: [csn_sn_id], references: [sn_id], onDelete: Cascade, map: "fk_csn_sn_id")
+
+  @@index([csn_con_id], map: "fk_csn_con_id")
+  @@index([csn_sn_id], map: "fk_csn_sn_id")
+}
+
+model contract_types {
+  ct_id   Int      @id @default(autoincrement())
+  ct_name String   @unique(map: "ct_name") @db.VarChar(100)
+  offers  offers[]
+}
+
+model currencies {
+  crr_id  Int      @id @default(autoincrement())
+  crr_iso String   @unique(map: "crr_iso") @db.VarChar(3)
+  offers  offers[]
+}
+
+model curriculum {
+  curr_id     Int   @id @default(autoincrement())
+  curr_pdf    Bytes @db.Blob
+  curr_usr_id Int
+  users       users @relation(fields: [curr_usr_id], references: [usr_id], onDelete: Cascade, map: "fk_curr_usr_id")
+
+  @@index([curr_usr_id], map: "fk_curr_usr_id")
+}
+
+model district {
+  dis_id         Int       @id @default(autoincrement())
+  dis_name       String    @db.VarChar(50)
+  dis_country_id Int
+  countries      countries @relation(fields: [dis_country_id], references: [cntr_id], onDelete: Cascade, map: "fk_dis_country_id")
+  cities         cities[]
+
+  @@index([dis_country_id], map: "fk_dis_country_id")
+}
+
+model graduates {
+  grd_ced         Int               @id
+  grd_fir_name    String            @db.VarChar(50)
+  grd_sec_name    String?           @db.VarChar(50)
+  grd_fir_surname String            @db.VarChar(50)
+  grd_sec_surname String            @db.VarChar(50)
+  grd_per_email   String            @db.VarChar(100)
+  grd_ins_email   String            @db.VarChar(100)
+  grd_hq_id       Int
+  grd_cty_id      Int
+  grd_created_at  DateTime          @default(now()) @db.Timestamp(0)
+  grd_updated_at  DateTime?         @db.Timestamp(0)
+  grd_deleted_at  DateTime?         @db.Timestamp(0)
+  cities          cities            @relation(fields: [grd_cty_id], references: [cty_id], onDelete: NoAction, map: "fk_grd_cty_id")
+  headquarters    headquarters      @relation(fields: [grd_hq_id], references: [hq_id], onDelete: NoAction, map: "fk_grd_hq_id")
+  candidatures    candidatures[]
+  users_graduates users_graduates[]
+
+  @@index([grd_cty_id], map: "fk_grd_cty_id")
+  @@index([grd_hq_id], map: "fk_grd_hq_id")
+}
+
+model headquarters {
+  hq_id         Int         @id @default(autoincrement())
+  hq_address    String      @db.VarChar(100)
+  hq_cty_id     Int
+  hq_con_id     Int?
+  hq_created_at DateTime    @default(now()) @db.Timestamp(0)
+  hq_updated_at DateTime?   @db.Timestamp(0)
+  hq_deleted_at DateTime?   @db.Timestamp(0)
+  contact       contact?    @relation(fields: [hq_con_id], references: [con_id], onDelete: Cascade, map: "fk_hq_con_id")
+  cities        cities      @relation(fields: [hq_cty_id], references: [cty_id], onDelete: Cascade, map: "fk_hq_cty_id")
+  graduates     graduates[]
+
+  @@index([hq_con_id], map: "fk_hq_con_id")
+  @@index([hq_cty_id], map: "fk_hq_cty_id")
+}
+
+model human_resources {
+  hr_id         Int         @id
+  hr_name       String      @db.VarChar(100)
+  hr_lastname   String      @db.VarChar(100)
+  hr_telephone  Int
+  hr_email      String      @db.VarChar(100)
+  hr_created_at DateTime    @default(now()) @db.Timestamp(0)
+  hr_updated_at DateTime?   @db.Timestamp(0)
+  hr_deleted_at DateTime?   @db.Timestamp(0)
+  companies     companies[]
+}
+
+model legal_representative {
+  lg_id         Int         @id
+  lg_name       String      @db.VarChar(100)
+  lg_lastname   String      @db.VarChar(100)
+  lg_created_at DateTime    @default(now()) @db.Timestamp(0)
+  lg_updated_at DateTime?   @db.Timestamp(0)
+  lg_deleted_at DateTime?   @db.Timestamp(0)
+  companies     companies[]
+}
+
+model offers {
+  ofr_id          Int             @id @default(autoincrement())
+  ofr_com_nit     Int
+  title           String          @db.VarChar(100)
+  salary          String          @db.VarChar(100)
+  ofr_crr_id      Int
+  vacancies       Int             @default(1)
+  modality        offers_modality
+  hiring          DateTime        @db.Date
+  ofr_ct_id       Int?
+  ofr_wd_id       Int?
+  ofr_description String?         @db.Text
+  ofr_requisites  String?         @db.Text
+  ofr_created_at  DateTime        @default(now()) @db.Timestamp(0)
+  ofr_updated_at  DateTime?       @db.Timestamp(0)
+  ofr_deleted_at  DateTime?       @db.Timestamp(0)
+  companies       companies       @relation(fields: [ofr_com_nit], references: [com_nit], onDelete: NoAction, map: "fk_ofr_com_nit")
+  currencies      currencies      @relation(fields: [ofr_crr_id], references: [crr_id], onDelete: NoAction, map: "fk_ofr_crr_id")
+  contract_types  contract_types? @relation(fields: [ofr_ct_id], references: [ct_id], map: "fk_ofr_ct_id")
+  workday         workday?        @relation(fields: [ofr_wd_id], references: [wd_id], map: "fk_ofr_wd_id")
+  candidatures    candidatures[]
+  offers_tags     offers_tags[]
+
+  @@index([ofr_com_nit], map: "fk_ofr_com_nit")
+  @@index([ofr_crr_id], map: "fk_ofr_crr_id")
+  @@index([ofr_ct_id], map: "fk_ofr_ct_id")
+  @@index([ofr_wd_id], map: "fk_ofr_wd_id")
+}
+
+model offers_tags {
+  ot_id     Int    @id @default(autoincrement())
+  ot_ofr_id Int
+  ot_tag_id Int
+  offers    offers @relation(fields: [ot_ofr_id], references: [ofr_id], onDelete: Cascade, map: "fk_ot_ofr_id")
+  tags      tags   @relation(fields: [ot_tag_id], references: [tag_id], onDelete: NoAction, map: "fk_ot_tag_id")
+
+  @@index([ot_ofr_id], map: "fk_ot_ofr_id")
+  @@index([ot_tag_id], map: "fk_ot_tag_id")
+}
+
+model restrictions {
+  res_id             Int                  @id @default(autoincrement())
+  res_description    String               @db.VarChar(255)
+  roles_restrictions roles_restrictions[]
+}
+
+model roles {
+  rol_id             Int                  @id @default(autoincrement())
+  rol_description    String               @db.VarChar(20)
+  roles_restrictions roles_restrictions[]
+  users              users[]
+}
+
+model roles_restrictions {
+  rr_id        Int          @id @default(autoincrement())
+  rr_rol_id    Int
+  rr_res_id    Int
+  restrictions restrictions @relation(fields: [rr_res_id], references: [res_id], onDelete: NoAction, map: "fk_rr_res_id")
+  roles        roles        @relation(fields: [rr_rol_id], references: [rol_id], onDelete: NoAction, map: "fk_rr_rol_id")
+
+  @@index([rr_res_id], map: "fk_rr_res_id")
+  @@index([rr_rol_id], map: "fk_rr_rol_id")
+}
+
+model social_networks {
+  sn_id      Int          @id @default(autoincrement())
+  sn_name    String       @unique(map: "sn_name") @db.VarChar(100)
+  sn_icon    Bytes        @db.TinyBlob
+  contact_sn contact_sn[]
+}
+
+model tags {
+  tag_id      Int           @id @default(autoincrement())
+  tag_name    String        @unique(map: "tag_name") @db.VarChar(100)
+  offers_tags offers_tags[]
+}
+
+model users {
+  usr_id          Int               @id @default(autoincrement())
+  username        String            @unique(map: "username") @db.VarChar(50)
+  password        String            @db.VarChar(255)
+  about_me        String?           @db.VarChar(255)
+  usr_rol_id      Int
+  usr_created_at  DateTime          @default(now()) @db.Timestamp(0)
+  usr_updated_at  DateTime?         @db.Timestamp(0)
+  usr_deleted_at  DateTime?         @db.Timestamp(0)
+  roles           roles             @relation(fields: [usr_rol_id], references: [rol_id], onDelete: Cascade, map: "fk_usr_rol_id")
+  curriculum      curriculum[]
+  users_companies users_companies[]
+  users_graduates users_graduates[]
+
+  @@index([usr_rol_id], map: "fk_usr_rol_id")
+}
+
+model users_companies {
+  uc_id      Int       @id @default(autoincrement())
+  uc_usr_id  Int
+  uc_com_nit Int
+  companies  companies @relation(fields: [uc_com_nit], references: [com_nit], onDelete: Cascade, map: "fk_uc_com_nit")
+  users      users     @relation(fields: [uc_usr_id], references: [usr_id], onDelete: Cascade, map: "fk_uc_usr_id")
+
+  @@index([uc_com_nit], map: "fk_uc_com_nit")
+  @@index([uc_usr_id], map: "fk_uc_usr_id")
+}
+
+model users_graduates {
+  ug_id      Int       @id @default(autoincrement())
+  ug_usr_id  Int
+  ug_grd_ced Int
+  graduates  graduates @relation(fields: [ug_grd_ced], references: [grd_ced], onDelete: Cascade, map: "fk_ug_grd_ced")
+  users      users     @relation(fields: [ug_usr_id], references: [usr_id], onDelete: Cascade, map: "fk_ug_usr_id")
+
+  @@index([ug_grd_ced], map: "fk_ug_grd_ced")
+  @@index([ug_usr_id], map: "fk_ug_usr_id")
+}
+
+model workday {
+  wd_id   Int      @id @default(autoincrement())
+  wd_name String   @unique(map: "wd_name") @db.VarChar(50)
+  offers  offers[]
+}
+
+model countries {
+  cntr_id   Int        @id @default(autoincrement())
+  cntr_name String     @unique(map: "cntr_name") @db.VarChar(40)
+  district  district[]
+}
+
+enum candidatures_cdt_status {
+  En_proceso @map("En proceso")
+  En_espera  @map("En espera")
+  Contratado
+  Rechazado
+}
+
+enum offers_modality {
+  Presencial
+  Remoto
+  Flexible
+}

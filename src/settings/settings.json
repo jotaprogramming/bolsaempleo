@@ -1,0 +1,6 @@
+{
+	"errors": {
+		"not_found": "Registro no encontrado",
+		"unique": "El valor ingresado ya existe"
+	}
+}
