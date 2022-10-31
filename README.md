@@ -8,7 +8,7 @@ date: "2022-30-10"
 
 # :book: Job board
 
-![Depfu](https://img.shields.io/depfu/jotaprogramming/bolsaempleo)
+![dependencies](https://img.shields.io/depfu/dependencies/github/jotaprogramming/bolsaempleo)
 [![doc_in_english](https://img.shields.io/badge/Project_documentation-English-blue)](en-README.md)
 [![doc_in_spanish](https://img.shields.io/badge/Documentación_del_proyecto-Español-orange)](es-README.md)
 
