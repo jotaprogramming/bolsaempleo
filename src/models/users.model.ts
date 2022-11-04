@@ -1,48 +1,50 @@
-import Repository from '../repositories/countries.repository';
-// import { countries, countries } from '../interfaces/countries.interfaces';
+import Repository from '../repositories/users.repository';
+// import { users, users } from '../interfaces/users.interfaces';
 import {
 	IFindAll,
 	IFindOne,
 	IStore,
 	IUpdate,
+	IDelete,
 	IDestroy,
 } from '../interfaces/model.interface';
 import { IResult } from '../interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
-import { countries } from '@prisma/client';
+import { users } from '@prisma/client';
 
-class CountriesModel
+class UsersModel
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
-		IStore<countries>,
-		IUpdate<number, countries>,
+		IStore<users>,
+		IUpdate<number, users>,
+		IDelete<number>,
 		IDestroy<number>
 {
-	async store(body: countries): Promise<IResult> {
+	async store(body: users): Promise<IResult> {
 		try {
-			// const { name }: countries = body;
-			// const data: countries = {
+			// const { name }: users = body;
+			// const data: users = {
 			// 	cntr_name: name,
 			// };
-			const result: countries = await Repository.store(body);
-			// const result: countries = {
+			const result: users = await Repository.store(body);
+			// const result: users = {
 			// 	id: storeCountry.cntr_id,
 			// 	name: storeCountry.cntr_name,
 			// };
-			return HTTPResponse(201, result);
+			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);
 		}
 	}
 	async findAll(): Promise<IResult> {
 		try {
-			const result: Array<countries> = await Repository.findAll();
+			const result: Array<users> = await Repository.findAll();
 			if (result.length === 0) {
 				return HTTPResponse(204);
 			}
-			// const result: Array<countries> = getCountries.map((element) => {
+			// const result: Array<users> = getusers.map((element) => {
 			// 	return {
 			// 		id: element.cntr_id,
 			// 		name: element.cntr_name,
@@ -55,11 +57,11 @@ class CountriesModel
 	}
 	async findOne(id: number): Promise<IResult> {
 		try {
-			const result: countries | null = await Repository.findOne(id);
+			const result: users | null = await Repository.findOne(id);
 			if (!result) {
 				return HTTPResponse(204);
 			}
-			// const result: countries = {
+			// const result: users = {
 			// 	id: getCountry!.cntr_id,
 			// 	name: getCountry!.cntr_name,
 			// };
@@ -68,17 +70,17 @@ class CountriesModel
 			return typeError(error);
 		}
 	}
-	async update(id: number, body: countries): Promise<IResult> {
+	async update(id: number, body: users): Promise<IResult> {
 		try {
-			// const { name }: countries = body;
-			// const data: countries = {
+			// const { name }: users = body;
+			// const data: users = {
 			// 	cntr_name: name,
 			// };
-			const result: countries = await Repository.update(id, body);
+			const result: users = await Repository.update(id, body);
 			if (Object.keys(result).length === 0) {
 				return HTTPResponse(204);
 			}
-			// const result: countries = {
+			// const result: users = {
 			// 	id: putCountry!.cntr_id,
 			// 	name: putCountry!.cntr_name,
 			// };
@@ -87,20 +89,21 @@ class CountriesModel
 			return typeError(error);
 		}
 	}
+	async delete(id: number): Promise<IResult> {
+		try {
+			const result: users = await Repository.delete(id);
+			return HTTPResponse(200, result);
+		} catch (error: any) {
+			return typeError(error);
+		}
+	}
 	async destroy(id: number): Promise<IResult> {
 		try {
-			const result: countries = await Repository.destroy(id);
+			const result: users = await Repository.destroy(id);
 			return HTTPResponse(204, result);
 		} catch (error: any) {
 			return typeError(error);
 		}
-		/*
-		try {
-			return HTTPResponse(204);
-		} catch (error: any) {
-			return typeError(error);
-		}
-		*/
 	}
 }
-export default new CountriesModel();
+export default new UsersModel();

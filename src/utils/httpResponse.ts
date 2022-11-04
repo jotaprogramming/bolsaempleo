@@ -1,4 +1,4 @@
-import { IResult } from '../interfaces/model.interfaces';
+import { IResult } from '../interfaces/result.interface';
 import { ReasonPhrases } from 'http-status-codes';
 
 export default function httpResponse(status: number, result?: {}): IResult {

@@ -1,4 +1,4 @@
-import { IResult } from './model.interfaces';
+import { IResult } from './result.interface';
 
 export interface IStore<TReturn> {
 	store(body: TReturn): Promise<IResult>;

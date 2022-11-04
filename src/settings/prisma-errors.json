@@ -1,6 +1,7 @@
 {
 	"codes": {
 		"P2002": "Unique constraint failed on the constraint",
+		"P2003": "Foreign key constraint failed",
 		"P2025": "An operation failed because it depends on one or more records that were required but not found."
 	}
 }

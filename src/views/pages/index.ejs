@@ -1,17 +1,24 @@
 <%- include('../partials/_head', {title : title}) %>
 
 <!-- links -->
-    
+
 <!-- ... -->
 
 <%- include('../partials/_body') %>
 
 <!-- template -->
-<h1><%= title %></h1>
+<%- include('../../components/navbar.component.ejs') %>
+
+<main class="container">
+    <div class="container__card">
+        <%- include('../../components/card_aside.component.ejs', {view: 'login'}) %>
+        <%- include('../partials/_card_form', {headline: 'INICIO DE SESIÓN', subtitle: 'Por favor, ingrese sus credenciales', warning: 'Recuerde que puede usar tanto su correo electrónico como su usuario'}) %>
+    </div>
+</main>
 <!-- ... -->
 
 <!-- scripts -->
-    
+
 <!-- ... -->
 
 <%- include('../partials/_foot') %>

@@ -1,5 +1,6 @@
 import prisma from '../config/db';
-import { ICountry, IDBCountry } from '../interfaces/country.interfaces';
+// import { ICountry, countries } from '../interfaces/countries.interfaces';
+import { countries } from '@prisma/client';
 import {
 	IFindAll,
 	IStore,
@@ -10,35 +11,32 @@ import {
 
 class CountriesRepository
 	implements
-		IStore<IDBCountry>,
-		IFindAll<IDBCountry>,
-		IFindOne<number, IDBCountry>,
-		IUpdate<number, IDBCountry>,
-		IDestroy<number, IDBCountry>
+		IStore<countries>,
+		IFindAll<countries>,
+		IFindOne<number, countries>,
+		IUpdate<number, countries>,
+		IDestroy<number, countries>
 {
-	async store(body: IDBCountry): Promise<IDBCountry> {
-		const { cntr_name } = body;
+	async store(body: countries): Promise<countries> {
 		return await prisma.countries.create({
-			data: {
-				cntr_name,
-			},
+			data: body,
 		});
 	}
-	async findAll(): Promise<Array<IDBCountry>> {
+	async findAll(): Promise<Array<countries>> {
 		return await prisma.countries.findMany({
 			orderBy: {
 				cntr_name: 'asc',
 			},
 		});
 	}
-	async findOne(id: number): Promise<IDBCountry | null> {
+	async findOne(id: number): Promise<countries | null> {
 		return await prisma.countries.findUnique({
 			where: {
 				cntr_id: id,
 			},
 		});
 	}
-	async update(id: number, data: IDBCountry): Promise<IDBCountry> {
+	async update(id: number, data: countries): Promise<countries> {
 		return await prisma.countries.update({
 			where: {
 				cntr_id: id,
@@ -46,7 +44,7 @@ class CountriesRepository
 			data: data,
 		});
 	}
-	async destroy(id: number): Promise<IDBCountry> {
+	async destroy(id: number): Promise<countries> {
 		return await prisma.countries.delete({
 			where: {
 				cntr_id: id,

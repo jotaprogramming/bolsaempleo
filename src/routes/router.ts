@@ -1,5 +1,6 @@
 import { Express } from 'express';
 import indexRoutes from './index.routes';
+import userRoutes from './users.routes';
 import countryRoutes from './country.routes';
 import settingsRoutes from './settings.routes';
 
@@ -10,6 +11,7 @@ import settingsRoutes from './settings.routes';
  */
 const router = (app: Express) => {
 	app.use(indexRoutes);
+	app.use('/', userRoutes);
 	app.use('/countries', countryRoutes);
 	app.use('/settings', settingsRoutes);
 };

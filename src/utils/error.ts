@@ -1,5 +1,5 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
-import { IResult } from '../interfaces/model.interfaces';
+import { IResult } from '../interfaces/result.interface';
 import httpResponse from './httpResponse';
 import prismaError from './prismaError';
 

@@ -1,7 +1,7 @@
 import messages from '../settings/settings.json';
 import defaultErrors from '../settings/prisma-errors.json';
 import { IPrismaError } from '../interfaces/error.interface';
-import { IResult } from '../interfaces/model.interfaces';
+import { IResult } from '../interfaces/result.interface';
 import httpResponse from './httpResponse';
 
 export default function prismaError(error: any): IResult {
@@ -12,6 +12,10 @@ export default function prismaError(error: any): IResult {
 		case 'P2002':
 			result['message'] =
 				messages.errors.unique || defaultErrors.codes.P2002;
+			break;
+		case 'P2003':
+			result['message'] =
+				messages.errors.empty || defaultErrors.codes.P2003;
 			break;
 		case 'P2025':
 			result['message'] =

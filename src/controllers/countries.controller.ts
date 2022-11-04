@@ -8,7 +8,8 @@ import {
 	IDestroy,
 } from '../interfaces/controller.interfaces';
 import CountriesModel from '../models/countries.model';
-import { ICountry } from '../interfaces/country.interfaces';
+import { countries } from '@prisma/client';
+import { IResult } from '../interfaces/result.interface';
 
 class CountriesController
 	implements
@@ -19,29 +20,29 @@ class CountriesController
 		IDestroy<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: ICountry = req.body;
-		const data = await CountriesModel.store(body);
+		const body: countries = req.body;
+		const data: IResult = await CountriesModel.store(body);
 		res.status(data.status).json(data.result);
 	}
 	async findAll(_: Request, res: Response): Promise<void> {
-		const data = await CountriesModel.findAll();
+		const data: IResult = await CountriesModel.findAll();
 		// res.render('pages/countries/index', { result: result });
 		res.status(data.status).json(data.result);
 	}
 	async findOne(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const data = await CountriesModel.findOne(parseInt(id));
+		const data: IResult = await CountriesModel.findOne(parseInt(id));
 		res.status(data.status).json(data.result);
 	}
 	async update(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const body: ICountry = req.body;
-		const data = await CountriesModel.update(parseInt(id), body);
+		const body: countries = req.body;
+		const data: IResult = await CountriesModel.update(parseInt(id), body);
 		res.status(data.status).json(data.result);
 	}
 	async destroy(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const data = await CountriesModel.destroy(parseInt(id));
+		const data: IResult = await CountriesModel.destroy(parseInt(id));
 		res.status(data.status).json(data.result);
 	}
 }
