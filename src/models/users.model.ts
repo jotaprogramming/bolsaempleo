@@ -43,15 +43,15 @@ class UsersModel
 			return typeError(error);
 		}
 	}
-	async match({ username = null, email = null }, password: string) {
+	async match(username: string, password: string) {
 		try {
 			let user: users | null = null;
 			let result: users | null = null;
-			if (username) {
+			const isEmail = verifyEmail(username);
+			if (isEmail) {
+				user = await Repository.matchEmail(username);
+			} else {
 				user = await Repository.matchUsername(username);
-			}
-			if (!user && email) {
-				user = await Repository.matchEmail(email);
 			}
 			if (user) {
 				const pass: boolean = await bcrypt.compare(

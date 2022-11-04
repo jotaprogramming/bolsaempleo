@@ -34,8 +34,8 @@ class UsersController
 		});
 	}
 	async auth(req: Request, res: Response) {
-		const { username, email, password } = req.body;
-		const data: IResult = await Model.match({ username, email }, password);
+		const { username, password } = req.body;
+		const data: IResult = await Model.match(username, password);
 		res.status(data.status).json(data.result);
 	}
 	async store(req: Request, res: Response): Promise<void> {

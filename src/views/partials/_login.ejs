@@ -1,22 +1,24 @@
-<div class="container__card__form__body__inputs">
-    <section class="inputss">
-        <section class="box">
-            <%- include('../../components/icon.component.ejs', {icon_name: 'icon-user'}) %>
-            <%- include('../../components/input.component.ejs', {id: 'user', placeholder: 'Correo / Usuario'}) %>
+<form action="/auth" method="post">
+    <div class="container__card__form__body__inputs">
+        <section class="inputss">
+            <section class="box">
+                <%- include('../../components/icon.component.ejs', {icon_name: 'icon-user'}) %>
+                <%- include('../../components/input.component.ejs', {id: 'username', placeholder: 'Correo / Usuario'}) %>
+            </section>
         </section>
-    </section>
-</div>
-<div class="container__card__form__body__inputs">
-    <section class="inputss">
-        <section class="box">
-            <%- include('../../components/icon.component.ejs', {icon_name: 'icon-padlock-close-square-light'}) %>
-            <%- include('../../components/input.component.ejs', {id: 'password', placeholder: 'Contraseña'}) %>
+    </div>
+    <div class="container__card__form__body__inputs">
+        <section class="inputss">
+            <section class="box">
+                <%- include('../../components/icon.component.ejs', {icon_name: 'icon-padlock-close-square-light'}) %>
+                <%- include('../../components/input.component.ejs', {id: 'password', placeholder: 'Contraseña'}) %>
+            </section>
         </section>
-    </section>
-</div>
-<a href="" class="container__card__form__body__text">He olvidado mi contraseña</a>
-<div class="container__card__form__body__btn">
-    <section class="buttom">
-        <input class="buttom__default" type="submit" value="Continuar">
-    </section>
-</div>
+    </div>
+    <a href="" class="container__card__form__body__text">He olvidado mi contraseña</a>
+    <div class="container__card__form__body__btn">
+        <section class="buttom">
+            <input class="buttom__default" type="submit" value="Continuar">
+        </section>
+    </div>
+</form>
