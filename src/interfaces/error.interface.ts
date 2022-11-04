@@ -1,4 +1,4 @@
 export interface IPrismaError {
-	code: string;
+	code?: string;
 	message?: string;
 }

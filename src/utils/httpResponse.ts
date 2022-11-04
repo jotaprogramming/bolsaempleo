@@ -17,7 +17,7 @@ export default function httpResponse(status: number, result?: {}): IResult {
 			body['result'] = { reason: ReasonPhrases.NO_CONTENT };
 			break;
 		case 400:
-			body['result'] = { ...result };
+			body['result'] = { ...result, reason: ReasonPhrases.BAD_REQUEST };
 			break;
 		case 404:
 			body['result'] = { reason: ReasonPhrases.NOT_FOUND };

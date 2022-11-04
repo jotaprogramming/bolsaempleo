@@ -4,7 +4,7 @@ import { IPrismaError } from '../interfaces/error.interface';
 import { IResult } from '../interfaces/result.interface';
 import httpResponse from './httpResponse';
 
-export default function prismaError(error: any): IResult {
+export function knownRequestError(error: any): IResult {
 	let result: IPrismaError = {
 		code: error.code,
 	};
@@ -23,4 +23,11 @@ export default function prismaError(error: any): IResult {
 			break;
 	}
 	return httpResponse(400, result);
+}
+
+export function validationError(error: any): IResult {
+	// let result: IPrismaError = {
+	// 	message: error.message,
+	// };
+	return httpResponse(400);
 }
