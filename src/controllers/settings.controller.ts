@@ -22,7 +22,7 @@ const json_settings = fs.readFileSync(
 
 class SettingsController {
 	findAll(req: Request, res: Response) {
-		res.json(json_settings);
+		res.json(JSON.parse(json_settings));
 	}
 	update(req: Request, res: Response) {
 		const body: {} = req.body;
