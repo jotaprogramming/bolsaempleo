@@ -15,8 +15,8 @@ model candidatures {
   cdt_created_at DateTime                 @default(now()) @db.Timestamp(0)
   cdt_updated_at DateTime?                @db.Timestamp(0)
   cdt_deleted_at DateTime?                @db.Timestamp(0)
-  graduates      graduates                @relation(fields: [cdt_grd_ced], references: [grd_ced], onDelete: Cascade, map: "fk_cdt_grd_ced")
-  offers         offers                   @relation(fields: [cdt_ofr_id], references: [ofr_id], onDelete: Cascade, map: "fk_cdt_ofr_id")
+  graduates      graduates                @relation(fields: [cdt_grd_ced], references: [grd_ced], onDelete: NoAction, map: "fk_cdt_grd_ced")
+  offers         offers                   @relation(fields: [cdt_ofr_id], references: [ofr_id], onDelete: NoAction, map: "fk_cdt_ofr_id")
 
   @@index([cdt_grd_ced], map: "fk_cdt_grd_ced")
   @@index([cdt_ofr_id], map: "fk_cdt_ofr_id")
@@ -26,7 +26,7 @@ model cities {
   cty_id          Int            @id @default(autoincrement())
   cty_name        String         @db.VarChar(50)
   cty_district_id Int
-  district        district       @relation(fields: [cty_district_id], references: [dis_id], onDelete: Cascade, map: "fk_cty_district_id")
+  district        district       @relation(fields: [cty_district_id], references: [dis_id], onDelete: NoAction, map: "fk_cty_district_id")
   companies       companies[]
   graduates       graduates[]
   headquarters    headquarters[]
@@ -35,24 +35,19 @@ model cities {
 }
 
 model companies {
-  com_nit              Int                  @id
-  com_name             String               @db.VarChar(100)
-  com_address          String               @db.VarChar(100)
-  com_hr_id            Int
-  com_lg_id            Int
-  com_cty_id           Int
-  com_created_at       DateTime             @default(now()) @db.Timestamp(0)
-  com_updated_at       DateTime?            @db.Timestamp(0)
-  com_deleted_at       DateTime?            @db.Timestamp(0)
-  cities               cities               @relation(fields: [com_cty_id], references: [cty_id], onDelete: NoAction, map: "fk_com_cty_id")
-  human_resources      human_resources      @relation(fields: [com_hr_id], references: [hr_id], onDelete: NoAction, map: "fk_com_hr_id")
-  legal_representative legal_representative @relation(fields: [com_lg_id], references: [lg_id], onDelete: NoAction, map: "fk_com_lg_id")
-  offers               offers[]
-  users_companies      users_companies[]
+  com_nit         Int               @id
+  com_name        String            @db.VarChar(100)
+  com_address     String            @db.VarChar(100)
+  com_cty_id      Int
+  com_created_at  DateTime          @default(now()) @db.Timestamp(0)
+  com_updated_at  DateTime?         @db.Timestamp(0)
+  com_deleted_at  DateTime?         @db.Timestamp(0)
+  cities          cities            @relation(fields: [com_cty_id], references: [cty_id], onDelete: NoAction, map: "fk_com_cty_id")
+  companies_staff companies_staff[]
+  offers          offers[]
+  users_companies users_companies[]
 
   @@index([com_cty_id], map: "fk_com_cty_id")
-  @@index([com_hr_id], map: "fk_com_hr_id")
-  @@index([com_lg_id], map: "fk_com_lg_id")
 }
 
 model contact {
@@ -69,8 +64,8 @@ model contact_sn {
   csn_con_id      Int
   csn_sn_id       Int
   csn_path        String          @db.VarChar(255)
-  contact         contact         @relation(fields: [csn_con_id], references: [con_id], onDelete: Cascade, map: "fk_csn_con_id")
-  social_networks social_networks @relation(fields: [csn_sn_id], references: [sn_id], onDelete: Cascade, map: "fk_csn_sn_id")
+  contact         contact         @relation(fields: [csn_con_id], references: [con_id], onDelete: NoAction, map: "fk_csn_con_id")
+  social_networks social_networks @relation(fields: [csn_sn_id], references: [sn_id], onDelete: NoAction, map: "fk_csn_sn_id")
 
   @@index([csn_con_id], map: "fk_csn_con_id")
   @@index([csn_sn_id], map: "fk_csn_sn_id")
@@ -92,7 +87,7 @@ model curriculum {
   curr_id     Int   @id @default(autoincrement())
   curr_pdf    Bytes @db.Blob
   curr_usr_id Int
-  users       users @relation(fields: [curr_usr_id], references: [usr_id], onDelete: Cascade, map: "fk_curr_usr_id")
+  users       users @relation(fields: [curr_usr_id], references: [usr_id], onDelete: NoAction, map: "fk_curr_usr_id")
 
   @@index([curr_usr_id], map: "fk_curr_usr_id")
 }
@@ -101,7 +96,7 @@ model district {
   dis_id         Int       @id @default(autoincrement())
   dis_name       String    @db.VarChar(50)
   dis_country_id Int
-  countries      countries @relation(fields: [dis_country_id], references: [cntr_id], onDelete: Cascade, map: "fk_dis_country_id")
+  countries      countries @relation(fields: [dis_country_id], references: [cntr_id], onDelete: NoAction, map: "fk_dis_country_id")
   cities         cities[]
 
   @@index([dis_country_id], map: "fk_dis_country_id")
@@ -113,8 +108,7 @@ model graduates {
   grd_sec_name    String?           @db.VarChar(50)
   grd_fir_surname String            @db.VarChar(50)
   grd_sec_surname String            @db.VarChar(50)
-  grd_per_email   String            @db.VarChar(100)
-  grd_ins_email   String            @db.VarChar(100)
+  grd_email       String            @db.VarChar(100)
   grd_hq_id       Int
   grd_cty_id      Int
   grd_created_at  DateTime          @default(now()) @db.Timestamp(0)
@@ -137,34 +131,12 @@ model headquarters {
   hq_created_at DateTime    @default(now()) @db.Timestamp(0)
   hq_updated_at DateTime?   @db.Timestamp(0)
   hq_deleted_at DateTime?   @db.Timestamp(0)
-  contact       contact?    @relation(fields: [hq_con_id], references: [con_id], onDelete: Cascade, map: "fk_hq_con_id")
-  cities        cities      @relation(fields: [hq_cty_id], references: [cty_id], onDelete: Cascade, map: "fk_hq_cty_id")
+  contact       contact?    @relation(fields: [hq_con_id], references: [con_id], onDelete: NoAction, map: "fk_hq_con_id")
+  cities        cities      @relation(fields: [hq_cty_id], references: [cty_id], onDelete: NoAction, map: "fk_hq_cty_id")
   graduates     graduates[]
 
   @@index([hq_con_id], map: "fk_hq_con_id")
   @@index([hq_cty_id], map: "fk_hq_cty_id")
-}
-
-model human_resources {
-  hr_id         Int         @id
-  hr_name       String      @db.VarChar(100)
-  hr_lastname   String      @db.VarChar(100)
-  hr_telephone  Int
-  hr_email      String      @db.VarChar(100)
-  hr_created_at DateTime    @default(now()) @db.Timestamp(0)
-  hr_updated_at DateTime?   @db.Timestamp(0)
-  hr_deleted_at DateTime?   @db.Timestamp(0)
-  companies     companies[]
-}
-
-model legal_representative {
-  lg_id         Int         @id
-  lg_name       String      @db.VarChar(100)
-  lg_lastname   String      @db.VarChar(100)
-  lg_created_at DateTime    @default(now()) @db.Timestamp(0)
-  lg_updated_at DateTime?   @db.Timestamp(0)
-  lg_deleted_at DateTime?   @db.Timestamp(0)
-  companies     companies[]
 }
 
 model offers {
@@ -200,7 +172,7 @@ model offers_tags {
   ot_id     Int    @id @default(autoincrement())
   ot_ofr_id Int
   ot_tag_id Int
-  offers    offers @relation(fields: [ot_ofr_id], references: [ofr_id], onDelete: Cascade, map: "fk_ot_ofr_id")
+  offers    offers @relation(fields: [ot_ofr_id], references: [ofr_id], onDelete: NoAction, map: "fk_ot_ofr_id")
   tags      tags   @relation(fields: [ot_tag_id], references: [tag_id], onDelete: NoAction, map: "fk_ot_tag_id")
 
   @@index([ot_ofr_id], map: "fk_ot_ofr_id")
@@ -247,13 +219,14 @@ model tags {
 model users {
   usr_id          Int               @id @default(autoincrement())
   username        String            @unique(map: "username") @db.VarChar(50)
+  email           String            @unique(map: "email") @db.VarChar(100)
   password        String            @db.VarChar(255)
   about_me        String?           @db.VarChar(255)
   usr_rol_id      Int
   usr_created_at  DateTime          @default(now()) @db.Timestamp(0)
   usr_updated_at  DateTime?         @db.Timestamp(0)
   usr_deleted_at  DateTime?         @db.Timestamp(0)
-  roles           roles             @relation(fields: [usr_rol_id], references: [rol_id], onDelete: Cascade, map: "fk_usr_rol_id")
+  roles           roles             @relation(fields: [usr_rol_id], references: [rol_id], onDelete: NoAction, map: "fk_usr_rol_id")
   curriculum      curriculum[]
   users_companies users_companies[]
   users_graduates users_graduates[]
@@ -265,8 +238,8 @@ model users_companies {
   uc_id      Int       @id @default(autoincrement())
   uc_usr_id  Int
   uc_com_nit Int
-  companies  companies @relation(fields: [uc_com_nit], references: [com_nit], onDelete: Cascade, map: "fk_uc_com_nit")
-  users      users     @relation(fields: [uc_usr_id], references: [usr_id], onDelete: Cascade, map: "fk_uc_usr_id")
+  companies  companies @relation(fields: [uc_com_nit], references: [com_nit], onDelete: NoAction, map: "fk_uc_com_nit")
+  users      users     @relation(fields: [uc_usr_id], references: [usr_id], onDelete: NoAction, map: "fk_uc_usr_id")
 
   @@index([uc_com_nit], map: "fk_uc_com_nit")
   @@index([uc_usr_id], map: "fk_uc_usr_id")
@@ -276,8 +249,8 @@ model users_graduates {
   ug_id      Int       @id @default(autoincrement())
   ug_usr_id  Int
   ug_grd_ced Int
-  graduates  graduates @relation(fields: [ug_grd_ced], references: [grd_ced], onDelete: Cascade, map: "fk_ug_grd_ced")
-  users      users     @relation(fields: [ug_usr_id], references: [usr_id], onDelete: Cascade, map: "fk_ug_usr_id")
+  graduates  graduates @relation(fields: [ug_grd_ced], references: [grd_ced], onDelete: NoAction, map: "fk_ug_grd_ced")
+  users      users     @relation(fields: [ug_usr_id], references: [usr_id], onDelete: NoAction, map: "fk_ug_usr_id")
 
   @@index([ug_grd_ced], map: "fk_ug_grd_ced")
   @@index([ug_usr_id], map: "fk_ug_usr_id")
@@ -293,6 +266,39 @@ model countries {
   cntr_id   Int        @id @default(autoincrement())
   cntr_name String     @unique(map: "cntr_name") @db.VarChar(40)
   district  district[]
+}
+
+model companies_staff {
+  cs_id      Int       @id @default(autoincrement())
+  cs_com_nit Int
+  cs_stf_id  Int
+  companies  companies @relation(fields: [cs_com_nit], references: [com_nit], onDelete: NoAction, map: "fk_cs_com_nit")
+  staff      staff     @relation(fields: [cs_stf_id], references: [stf_id], onDelete: NoAction, map: "fk_cs_stf_id")
+
+  @@index([cs_com_nit], map: "fk_cs_com_nit")
+  @@index([cs_stf_id], map: "fk_cs_stf_id")
+}
+
+model job_title {
+  jt_id   Int     @id @default(autoincrement())
+  jt_name String  @db.VarChar(50)
+  staff   staff[]
+}
+
+model staff {
+  stf_id          Int               @id
+  stf_name        String            @db.VarChar(100)
+  stf_lastname    String            @db.VarChar(100)
+  stf_telephone   Int
+  stf_email       String            @db.VarChar(100)
+  stf_jt_id       Int
+  stf_created_at  DateTime          @default(now()) @db.Timestamp(0)
+  stf_updated_at  DateTime?         @db.Timestamp(0)
+  stf_deleted_at  DateTime?         @db.Timestamp(0)
+  job_title       job_title         @relation(fields: [stf_jt_id], references: [jt_id], onDelete: NoAction, map: "fk_stf_jt_id")
+  companies_staff companies_staff[]
+
+  @@index([stf_jt_id], map: "fk_stf_jt_id")
 }
 
 enum candidatures_cdt_status {

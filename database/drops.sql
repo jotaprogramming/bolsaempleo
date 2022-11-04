@@ -1,0 +1,27 @@
+-- Active: 1659019681460@@127.0.0.1@3306@jobcenter
+DROP TABLE IF EXISTS countries;
+DROP TABLE IF EXISTS district;
+DROP TABLE IF EXISTS cities;
+DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS contract_types;
+DROP TABLE IF EXISTS job_title;
+DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS companies;
+DROP TABLE IF EXISTS companies_staff;
+DROP TABLE IF EXISTS currencies;
+DROP TABLE IF EXISTS workday;
+DROP TABLE IF EXISTS offers;
+DROP TABLE IF EXISTS offers_tags;
+DROP TABLE IF EXISTS social_networks;
+DROP TABLE IF EXISTS contact;
+DROP TABLE IF EXISTS contact_sn;
+DROP TABLE IF EXISTS headquarters;
+DROP TABLE IF EXISTS graduates;
+DROP TABLE IF EXISTS restrictions;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS roles_restrictions;
+DROP TABLE IF EXISTS candidatures;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users_companies;
+DROP TABLE IF EXISTS users_graduates;
+DROP TABLE IF EXISTS curriculum;
