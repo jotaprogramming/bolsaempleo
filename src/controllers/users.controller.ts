@@ -12,6 +12,7 @@ import {
 } from '../interfaces/controller.interfaces';
 import { IResult } from '../interfaces/result.interface';
 import Model from '../models/users.model';
+import verifyEmail from '../utils/email';
 
 class UsersController
 	implements
@@ -32,7 +33,11 @@ class UsersController
 				'Recuerde que puede usar tanto su correo electrónico como su usuario',
 		});
 	}
-	async auth(req: Request, res: Response) {}
+	async auth(req: Request, res: Response) {
+		const { username, email, password } = req.body;
+		const data: IResult = await Model.match({ username, email }, password);
+		res.status(data.status).json(data.result);
+	}
 	async store(req: Request, res: Response): Promise<void> {
 		const body: users = req.body;
 		const data: IResult = await Model.store(body);

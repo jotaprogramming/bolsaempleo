@@ -17,9 +17,23 @@ class UsersRepository
 		IUpdate<number, users>,
 		IDestroy<number, users>
 {
-	async store(body: users): Promise<users> {
+	async store(data: users): Promise<users> {
 		return await prisma.users.create({
-			data: body,
+			data: data,
+		});
+	}
+	async matchEmail(email: string): Promise<users | null> {
+		return await prisma.users.findUnique({
+			where: {
+				email,
+			},
+		});
+	}
+	async matchUsername(username: string): Promise<users | null> {
+		return await prisma.users.findUnique({
+			where: {
+				username,
+			},
 		});
 	}
 	async findAll(): Promise<Array<users>> {

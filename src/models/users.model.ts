@@ -11,6 +11,8 @@ import {
 import { IResult } from '../interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
+import bcrypt from 'bcrypt';
+import verifyEmail from '../utils/email';
 import { users } from '@prisma/client';
 
 class UsersModel
@@ -24,15 +26,48 @@ class UsersModel
 {
 	async store(body: users): Promise<IResult> {
 		try {
-			// const { name }: users = body;
-			// const data: users = {
-			// 	cntr_name: name,
-			// };
+			const email: string = body.email;
+			const isEmail = verifyEmail(email);
+			if (!isEmail) {
+				return HTTPResponse(200, {
+					message: '¡El valor ingresado no es un correo electrónico!',
+				});
+			}
 			const result: users = await Repository.store(body);
 			// const result: users = {
 			// 	id: storeCountry.cntr_id,
 			// 	name: storeCountry.cntr_name,
 			// };
+			return HTTPResponse(200, result);
+		} catch (error: any) {
+			return typeError(error);
+		}
+	}
+	async match({ username = null, email = null }, password: string) {
+		try {
+			let user: users | null = null;
+			let result: users | null = null;
+			if (username) {
+				user = await Repository.matchUsername(username);
+			}
+			if (!user && email) {
+				user = await Repository.matchEmail(email);
+			}
+			if (user) {
+				const pass: boolean = await bcrypt.compare(
+					password,
+					user.password
+				);
+				if (pass) {
+					result = user;
+				}
+			}
+			if (!result) {
+				return HTTPResponse(200, {
+					message:
+						'Credenciales incorrectas. Vuelve a intentarlo o selecciona "¿He olvidado mi usuario o contraseña?" para cambiarla.',
+				});
+			}
 			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);
