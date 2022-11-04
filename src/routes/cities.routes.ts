@@ -1,5 +1,5 @@
-import { Router, Request, Response } from 'express';
-import controller from '../controllers/district.controller';
+import { Router } from 'express';
+import controller from '../controllers/cities.controller';
 
 const router: Router = Router();
 

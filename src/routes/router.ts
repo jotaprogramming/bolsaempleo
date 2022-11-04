@@ -1,8 +1,9 @@
 import { Express } from 'express';
 import indexRoutes from './index.routes';
 import userRoutes from './users.routes';
-import countryRoutes from './country.routes';
-import districtRoutes from './district.routes';
+import countryRoutes from './countries.routes';
+import districtsRoutes from './districts.routes';
+import citiesRoutes from './cities.routes';
 import settingRoutes from './settings.routes';
 
 /**
@@ -14,7 +15,8 @@ const router = (app: Express) => {
 	app.use(indexRoutes);
 	app.use('/', userRoutes);
 	app.use('/countries', countryRoutes);
-	app.use('/districts', districtRoutes);
+	app.use('/districts', districtsRoutes);
+	app.use('/cities', citiesRoutes);
 	app.use('/settings', settingRoutes);
 };
 

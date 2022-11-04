@@ -7,11 +7,11 @@ import {
 	IDelete,
 	IDestroy,
 } from '../interfaces/controller.interfaces';
-import Model from '../models/district.model';
-import { district } from '@prisma/client';
+import Model from '../models/cities.model';
+import { cities } from '@prisma/client';
 import { IResult } from '../interfaces/result.interface';
 
-class districtController
+class citiesController
 	implements
 		IFindAll<Request, Response>,
 		IStore<Request, Response>,
@@ -20,13 +20,12 @@ class districtController
 		IDestroy<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: district = req.body;
+		const body: cities = req.body;
 		const data: IResult = await Model.store(body);
 		res.status(data.status).json(data.result);
 	}
 	async findAll(_: Request, res: Response): Promise<void> {
 		const data: IResult = await Model.findAll();
-		// res.render('pages/district/index', { result: result });
 		res.status(data.status).json(data.result);
 	}
 	async findOne(req: Request, res: Response): Promise<void> {
@@ -36,7 +35,7 @@ class districtController
 	}
 	async update(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const body: district = req.body;
+		const body: cities = req.body;
 		const data: IResult = await Model.update(parseInt(id), body);
 		res.status(data.status).json(data.result);
 	}
@@ -47,4 +46,4 @@ class districtController
 	}
 }
 
-export default new districtController();
+export default new citiesController();
