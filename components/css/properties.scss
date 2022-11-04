@@ -1,0 +1,42 @@
+/*CUSTOM PROPERTIES*/
+:root{
+    $black-letter:#0F0F0F;
+    $background-gray:#1C1C1C;
+    $bar-gray:#242424;
+    $extrawhite-gray:#F6F6F6;
+    $extraligth-gray:#D7D7D7;
+    $gray-letter:#6F6F6F;
+    $hover-gray:#2C2C2C;
+    $ligth-gray:#ABABAB;
+    $primary-red:#D84B4B;
+    $primary-orange:#F4893C;
+    $primary-red:#D84B4B;
+    $primary-green:#5DB63D;
+    $primary-turquoise:#34B9C1;
+    $primary-blue:#4853BA;
+    $primary-gray:#2E2E2E;
+    $primary-purple:#943FC8;
+    $primary-sky-blue:#5EC4F0;
+    $primary-yellow:#FAB832;
+    $second-gray-letter:#484848;
+    $stroke-gray:#323232;
+    $white-gray:#E6E6E6;
+    $white-letter:#FFF;
+    $highlighted-gray:#202020;
+    
+    html{
+        box-sizing: border-box;
+        font-size: 16px;
+        font-family: 'Quicksand', sans-serif;
+        *,
+        *::after,
+        *::before{
+            padding: 0;
+            margin: 0;
+            box-sizing: inherit;
+        }
+    }
+      
+
+
+}

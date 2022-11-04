@@ -1,0 +1,336 @@
+@import  "properties.scss";/*It doesnt taking the properties, i have to check whats going on*/
+/*Meanwhile use hexadecimal color's value -----> lov u  😎*/
+
+
+/*----------------------- RESET HTML PROPERTIES---------------------*/
+html{
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+    *,
+    *::after,
+    *::before{
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
+    }
+    body{
+        width: 100%;
+        height: 100vh;
+    }
+}
+
+/*------------------HEADER------------------*/
+.header{
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #D7D7D7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header-brand{
+    width: 20%;
+    min-width: 250px;
+    background-color: #F4893C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    &__title{
+        font-weight: 500;
+        line-height: 20px;
+        font-size: 16px;
+        color:#FFF;
+    }
+}
+.header-tail{
+    width: 8%;
+    min-width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__text{
+        color: #6F6F6F;
+        text-decoration: none;
+        font-weight: 400;
+        line-height: 20px;
+        font-size: 16px;
+        &:hover{
+            color: #F4893C;
+        }
+
+    }
+}
+
+/*------------------ BODY-------------------*/
+.body{
+    &__letter{
+        margin-top: 32px;
+        margin-bottom: 16px;
+        font-weight: 300;
+        line-height: 18px;
+        font-size: 14px;
+        color: #0F0F0F;
+        &--link{
+            color: #0F0F0F;
+            font-weight: bold;
+            margin-bottom: 64px;
+            margin-left: 3px;
+        }
+        &--0mrg{
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        &--nomrg--center{
+            margin-top: 0;
+            text-align: center;
+
+        }
+        
+    }
+}
+.body-icons{
+    &__icon{
+        margin: 8px 10px;
+    }
+}
+.body-option{
+    height: auto;
+    width: 100px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border: 1px solid #D7D7D7;
+    border-radius: 10px;
+    background-color: #FFF;
+    color: #0F0F0F;
+    cursor: pointer;
+    &:hover{
+        background-color: #F4893C;
+        svg{
+            fill: #FFF;
+            outline: #FFF;
+            stroke: #FFF;
+        }
+        .body__letter{
+            color: #FFF;
+        }
+    }
+    &--letter{
+        font-family: 'Quicksand', sans-serif;
+    }
+    &--row{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-evenly;
+    }
+  
+}
+.box-card {
+    width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    &__letterhead{
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: auto;
+    }
+    &__body{
+        width: 100%;
+        height: auto;
+        &--row{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+    }
+    &__footer{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 64px;
+        align-items: center;
+    }
+}
+.btn-default{
+    border:none;
+    border-radius: 20px;
+    width: 100%;
+    height: 40px;
+    background-color: #F4893C;
+    margin-top: 24px;
+    cursor: pointer;
+    color: #FFF;
+    &:hover{
+        background-color: #FF5C16;
+    }
+    
+
+}
+.container{
+    width: 100%;
+    height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-box{
+    height: 90%;
+    min-height: 600px;
+    width: 70%;
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid #D7D7D7;
+    &__rigth{
+        min-width: 600px;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        border-top-right-radius:10px;
+        border-bottom-right-radius:10px;
+        justify-content: center;
+    }
+    &__left{
+        width: calc(100% - 600px);
+        max-width: 50%;
+        height: 100%;
+        display: flex;
+        border-top-left-radius:10px;
+        border-bottom-left-radius:10px;
+     
+    }
+}
+.group-inputs{
+    width: 100%;
+    height: 40px;
+    gap: 8px;
+    display: flex;
+    justify-content: center;
+    &__input{
+        height: 100%;
+        width: 40px;
+        border: 1px solid #D7D7D7;
+        border-radius: 10px;
+        &:active,
+        &:focus{
+            outline: 2px solid #D7D7D7;
+            text-align: center;
+        }
+    }
+}
+.inputs-group{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1px;
+    border: 1px solid #D7D7D7;
+    margin-bottom: 16px;
+    &:hover{
+        outline: 2px solid #F4893C;
+    }
+    &__icon{
+        height: 95%;
+        display: flex;
+        align-items: center;
+        border-top-left-radius:10px;
+        border-bottom-left-radius:10px;
+    }
+    &__input{
+        width: 95%;
+        height: 95%;
+        border: none;
+        border-left: 1px solid #D7D7D7;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding-left:16px ;
+        &:active,
+        &:focus{
+            outline: none;
+        }
+        &::placeholder{
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 400;
+            line-height: 18px;
+            font-size: 14px;
+        }
+        &--selection{
+            border: none;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        
+
+    }
+}
+.left-box{
+    height: 100%;
+    width: 100%;
+    &__figure{
+        min-height: 600px;
+        height: 100%;
+        width: 100%;
+        border-top-left-radius:10px;
+        border-bottom-left-radius:10px;
+        &--stroke{
+            border: 1px solid black;
+        }
+
+    }
+}
+.letterhead {
+    &__subtitle {
+        margin-top: 1rem;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: center;
+    }
+    &__title {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 40px;
+        &--center{
+          text-align: center;
+        }
+    }
+  }
+.rigth-box{
+    width: 100%;
+    height: 100%;
+    border-top-right-radius:10px;
+    border-bottom-right-radius:10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
