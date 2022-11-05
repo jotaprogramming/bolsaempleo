@@ -67,11 +67,11 @@ export default async function main() {
 							com_nit: 123,
 							com_name: 'Lorem SAS',
 							com_address: '123 street',
-							com_cty_id: 1
-						}
-					}
-				}
-			}
+							com_cty_id: 1,
+						},
+					},
+				},
+			},
 		},
 	});
 	const pepito: users = await prisma.users.upsert({
@@ -98,11 +98,11 @@ export default async function main() {
 							grd_sec_surname: 'Lorem',
 							grd_email: 'pepe@example.io',
 							grd_cty_id: 1,
-							grd_hq_id: 1
-						}
-					}
-				}
-			}
+							grd_hq_id: 1,
+						},
+					},
+				},
+			},
 		},
 	});
 }
