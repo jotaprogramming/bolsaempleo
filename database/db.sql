@@ -188,18 +188,18 @@ CREATE TABLE contact_sn(
     CONSTRAINT `fk_csn_sn_id` FOREIGN KEY (csn_sn_id) REFERENCES social_networks (sn_id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS headquarters;
+DROP TABLE IF EXISTS offices;
 
-CREATE TABLE headquarters(
-    hq_id INT PRIMARY KEY AUTO_INCREMENT,
-    hq_address VARCHAR(100) NOT NULL,
-    hq_cty_id INT NOT NULL COMMENT 'City Id',
-    hq_con_id INT NULL COMMENT 'Contact Id',
-    hq_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    hq_updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
-    hq_deleted_at TIMESTAMP NULL,
-    CONSTRAINT `fk_hq_cty_id` FOREIGN KEY (hq_cty_id) REFERENCES cities (cty_id) ON DELETE NO ACTION ON UPDATE CASCADE,
-    CONSTRAINT `fk_hq_con_id` FOREIGN KEY (hq_con_id) REFERENCES contact (con_id) ON DELETE NO ACTION ON UPDATE CASCADE
+CREATE TABLE offices(
+    off_id INT PRIMARY KEY AUTO_INCREMENT,
+    off_address VARCHAR(100) NOT NULL,
+    off_cty_id INT NOT NULL COMMENT 'City Id',
+    off_con_id INT NULL COMMENT 'Contact Id',
+    off_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    off_updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+    off_deleted_at TIMESTAMP NULL,
+    CONSTRAINT `fk_off_cty_id` FOREIGN KEY (off_cty_id) REFERENCES cities (cty_id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    CONSTRAINT `fk_off_con_id` FOREIGN KEY (off_con_id) REFERENCES contact (con_id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS graduates;
@@ -211,12 +211,12 @@ CREATE TABLE graduates(
     grd_fir_surname VARCHAR(50) NOT NULL COMMENT 'First surname',
     grd_sec_surname VARCHAR(50) NOT NULL COMMENT 'Second surname',
     grd_email VARCHAR(100) NOT NULL COMMENT 'Institutional email',
-    grd_hq_id INT NOT NULL COMMENT 'Headquarters Id',
+    grd_off_id INT NOT NULL COMMENT 'offices Id',
     grd_cty_id INT NOT NULL COMMENT 'City Id',
     grd_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     grd_updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     grd_deleted_at TIMESTAMP NULL,
-    CONSTRAINT `fk_grd_hq_id` FOREIGN KEY (grd_hq_id) REFERENCES headquarters (hq_id) ON DELETE NO ACTION ON UPDATE CASCADE,
+    CONSTRAINT `fk_grd_off_id` FOREIGN KEY (grd_off_id) REFERENCES offices (off_id) ON DELETE NO ACTION ON UPDATE CASCADE,
     CONSTRAINT `fk_grd_cty_id` FOREIGN KEY (grd_cty_id) REFERENCES cities (cty_id) ON DELETE NO ACTION ON UPDATE CASCADE
 );
 

@@ -105,30 +105,30 @@ CREATE TABLE `graduates` (
     `grd_fir_surname` VARCHAR(50) NOT NULL,
     `grd_sec_surname` VARCHAR(50) NOT NULL,
     `grd_email` VARCHAR(100) NOT NULL,
-    `grd_hq_id` INTEGER NOT NULL,
+    `grd_off_id` INTEGER NOT NULL,
     `grd_cty_id` INTEGER NOT NULL,
     `grd_created_at` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
     `grd_updated_at` TIMESTAMP(0) NULL,
     `grd_deleted_at` TIMESTAMP(0) NULL,
 
     INDEX `fk_grd_cty_id`(`grd_cty_id`),
-    INDEX `fk_grd_hq_id`(`grd_hq_id`),
+    INDEX `fk_grd_off_id`(`grd_off_id`),
     PRIMARY KEY (`grd_ced`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `headquarters` (
-    `hq_id` INTEGER NOT NULL AUTO_INCREMENT,
-    `hq_address` VARCHAR(100) NOT NULL,
-    `hq_cty_id` INTEGER NOT NULL,
-    `hq_con_id` INTEGER NULL,
-    `hq_created_at` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-    `hq_updated_at` TIMESTAMP(0) NULL,
-    `hq_deleted_at` TIMESTAMP(0) NULL,
+CREATE TABLE `offices` (
+    `off_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `off_address` VARCHAR(100) NOT NULL,
+    `off_cty_id` INTEGER NOT NULL,
+    `off_con_id` INTEGER NULL,
+    `off_created_at` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `off_updated_at` TIMESTAMP(0) NULL,
+    `off_deleted_at` TIMESTAMP(0) NULL,
 
-    INDEX `fk_hq_con_id`(`hq_con_id`),
-    INDEX `fk_hq_cty_id`(`hq_cty_id`),
-    PRIMARY KEY (`hq_id`)
+    INDEX `fk_off_con_id`(`off_con_id`),
+    INDEX `fk_off_cty_id`(`off_cty_id`),
+    PRIMARY KEY (`off_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -292,7 +292,8 @@ CREATE TABLE `job_title` (
 
 -- CreateTable
 CREATE TABLE `staff` (
-    `stf_id` INTEGER NOT NULL,
+    `stf_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `stf_ced` INTEGER NOT NULL,
     `stf_name` VARCHAR(100) NOT NULL,
     `stf_lastname` VARCHAR(100) NOT NULL,
     `stf_telephone` INTEGER NOT NULL,
@@ -334,13 +335,13 @@ ALTER TABLE `district` ADD CONSTRAINT `fk_dis_country_id` FOREIGN KEY (`dis_coun
 ALTER TABLE `graduates` ADD CONSTRAINT `fk_grd_cty_id` FOREIGN KEY (`grd_cty_id`) REFERENCES `cities`(`cty_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `graduates` ADD CONSTRAINT `fk_grd_hq_id` FOREIGN KEY (`grd_hq_id`) REFERENCES `headquarters`(`hq_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `graduates` ADD CONSTRAINT `fk_grd_off_id` FOREIGN KEY (`grd_off_id`) REFERENCES `offices`(`off_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `headquarters` ADD CONSTRAINT `fk_hq_con_id` FOREIGN KEY (`hq_con_id`) REFERENCES `contact`(`con_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `offices` ADD CONSTRAINT `fk_off_con_id` FOREIGN KEY (`off_con_id`) REFERENCES `contact`(`con_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `headquarters` ADD CONSTRAINT `fk_hq_cty_id` FOREIGN KEY (`hq_cty_id`) REFERENCES `cities`(`cty_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `offices` ADD CONSTRAINT `fk_off_cty_id` FOREIGN KEY (`off_cty_id`) REFERENCES `cities`(`cty_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `offers` ADD CONSTRAINT `fk_ofr_com_nit` FOREIGN KEY (`ofr_com_nit`) REFERENCES `companies`(`com_nit`) ON DELETE NO ACTION ON UPDATE CASCADE;

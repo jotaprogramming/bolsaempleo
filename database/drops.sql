@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS offers_tags;
 DROP TABLE IF EXISTS social_networks;
 DROP TABLE IF EXISTS contact;
 DROP TABLE IF EXISTS contact_sn;
-DROP TABLE IF EXISTS headquarters;
+DROP TABLE IF EXISTS offices;
 DROP TABLE IF EXISTS graduates;
 DROP TABLE IF EXISTS restrictions;
 DROP TABLE IF EXISTS roles;

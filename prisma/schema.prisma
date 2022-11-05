@@ -23,13 +23,13 @@ model candidatures {
 }
 
 model cities {
-  cty_id          Int            @id @default(autoincrement())
-  cty_name        String         @db.VarChar(50)
+  cty_id          Int         @id @default(autoincrement())
+  cty_name        String      @db.VarChar(50)
   cty_district_id Int
-  district        district       @relation(fields: [cty_district_id], references: [dis_id], onDelete: NoAction, map: "fk_cty_district_id")
+  district        district    @relation(fields: [cty_district_id], references: [dis_id], onDelete: NoAction, map: "fk_cty_district_id")
   companies       companies[]
   graduates       graduates[]
-  headquarters    headquarters[]
+  places          offices[]
 
   @@index([cty_district_id], map: "fk_cty_district_id")
 }
@@ -51,12 +51,12 @@ model companies {
 }
 
 model contact {
-  con_id        Int            @id @default(autoincrement())
-  con_email     String         @db.VarChar(100)
+  con_id        Int          @id @default(autoincrement())
+  con_email     String       @db.VarChar(100)
   con_phone     Int
   con_telephone Int
   contact_sn    contact_sn[]
-  headquarters  headquarters[]
+  places        offices[]
 }
 
 model contact_sn {
@@ -109,34 +109,34 @@ model graduates {
   grd_fir_surname String            @db.VarChar(50)
   grd_sec_surname String            @db.VarChar(50)
   grd_email       String            @db.VarChar(100)
-  grd_hq_id       Int
+  grd_off_id      Int
   grd_cty_id      Int
   grd_created_at  DateTime          @default(now()) @db.Timestamp(0)
   grd_updated_at  DateTime?         @db.Timestamp(0)
   grd_deleted_at  DateTime?         @db.Timestamp(0)
   cities          cities            @relation(fields: [grd_cty_id], references: [cty_id], onDelete: NoAction, map: "fk_grd_cty_id")
-  headquarters    headquarters      @relation(fields: [grd_hq_id], references: [hq_id], onDelete: NoAction, map: "fk_grd_hq_id")
+  offices         offices           @relation(fields: [grd_off_id], references: [off_id], onDelete: NoAction, map: "fk_grd_off_id")
   candidatures    candidatures[]
   users_graduates users_graduates[]
 
   @@index([grd_cty_id], map: "fk_grd_cty_id")
-  @@index([grd_hq_id], map: "fk_grd_hq_id")
+  @@index([grd_off_id], map: "fk_grd_off_id")
 }
 
-model headquarters {
-  hq_id         Int         @id @default(autoincrement())
-  hq_address    String      @db.VarChar(100)
-  hq_cty_id     Int
-  hq_con_id     Int?
-  hq_created_at DateTime    @default(now()) @db.Timestamp(0)
-  hq_updated_at DateTime?   @db.Timestamp(0)
-  hq_deleted_at DateTime?   @db.Timestamp(0)
-  contact       contact?    @relation(fields: [hq_con_id], references: [con_id], onDelete: NoAction, map: "fk_hq_con_id")
-  cities        cities      @relation(fields: [hq_cty_id], references: [cty_id], onDelete: NoAction, map: "fk_hq_cty_id")
-  graduates     graduates[]
+model offices {
+  off_id         Int         @id @default(autoincrement())
+  off_address    String      @db.VarChar(100)
+  off_cty_id     Int
+  off_con_id     Int?
+  off_created_at DateTime    @default(now()) @db.Timestamp(0)
+  off_updated_at DateTime?   @db.Timestamp(0)
+  off_deleted_at DateTime?   @db.Timestamp(0)
+  contact        contact?    @relation(fields: [off_con_id], references: [con_id], onDelete: NoAction, map: "fk_off_con_id")
+  cities         cities      @relation(fields: [off_cty_id], references: [cty_id], onDelete: NoAction, map: "fk_off_cty_id")
+  graduates      graduates[]
 
-  @@index([hq_con_id], map: "fk_hq_con_id")
-  @@index([hq_cty_id], map: "fk_hq_cty_id")
+  @@index([off_con_id], map: "fk_off_con_id")
+  @@index([off_cty_id], map: "fk_off_cty_id")
 }
 
 model offers {
