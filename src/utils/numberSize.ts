@@ -9,10 +9,10 @@
 export default function numberSize(num: number, min: number, max: number) {
 	const NUM = num.toString();
 	if (NUM.length < min) {
-		return `El valor es inferior al mínimo aceptado.`;
+		return `El valor ingresado es inferior al mínimo aceptado.`;
 	}
 	if (NUM.length > max) {
-		return `El valor es superior al máximo aceptado.`;
+		return `El valor ingresado es superior al máximo aceptado.`;
 	}
 	return null;
 }
