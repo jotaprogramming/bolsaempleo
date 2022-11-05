@@ -10,6 +10,7 @@ import { IResult } from '../interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
 import { countries } from '@prisma/client';
+import { objectCapitalize } from '../utils/formatting';
 
 class CountriesModel
 	implements
@@ -21,15 +22,8 @@ class CountriesModel
 {
 	async store(body: countries): Promise<IResult> {
 		try {
-			// const { name }: countries = body;
-			// const data: countries = {
-			// 	cntr_name: name,
-			// };
-			const result: countries = await Repository.store(body);
-			// const result: countries = {
-			// 	id: storeCountry.cntr_id,
-			// 	name: storeCountry.cntr_name,
-			// };
+			const data: countries = await objectCapitalize(body);
+			const result: countries = await Repository.store(data);
 			return HTTPResponse(201, result);
 		} catch (error: any) {
 			return typeError(error);
@@ -41,12 +35,6 @@ class CountriesModel
 			if (result.length === 0) {
 				return HTTPResponse(204);
 			}
-			// const result: Array<countries> = getCountries.map((element) => {
-			// 	return {
-			// 		id: element.cntr_id,
-			// 		name: element.cntr_name,
-			// 	};
-			// });
 			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);
@@ -58,10 +46,6 @@ class CountriesModel
 			if (!result) {
 				return HTTPResponse(204);
 			}
-			// const result: countries = {
-			// 	id: getCountry!.cntr_id,
-			// 	name: getCountry!.cntr_name,
-			// };
 			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);
@@ -69,18 +53,11 @@ class CountriesModel
 	}
 	async update(id: number, body: countries): Promise<IResult> {
 		try {
-			// const { name }: countries = body;
-			// const data: countries = {
-			// 	cntr_name: name,
-			// };
-			const result: countries = await Repository.update(id, body);
+			const data: countries = await objectCapitalize(body);
+			const result: countries = await Repository.update(id, data);
 			if (Object.keys(result).length === 0) {
 				return HTTPResponse(204);
 			}
-			// const result: countries = {
-			// 	id: putCountry!.cntr_id,
-			// 	name: putCountry!.cntr_name,
-			// };
 			return HTTPResponse(201, result);
 		} catch (error: any) {
 			return typeError(error);

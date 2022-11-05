@@ -1,3 +1,4 @@
+import { companies } from '@prisma/client';
 /**
  * It takes a string, splits it into an array of words, capitalizes the first letter of each word, and
  * then joins the array back into a string
@@ -11,4 +12,23 @@ export function capitalize(str: string) {
 		return word[0].toUpperCase() + word.substring(1);
 	});
 	return new_str.join(' ');
+}
+
+export async function objectCapitalize(body: any): Promise<any> {
+	const temp_body: any = body;
+	const values = Object.values(body);
+	const keys = Object.keys(body);
+	const temp_values = values.map((item) => {
+		if (typeof item == 'string') {
+			return capitalize(item);
+		}
+		if (typeof item == 'object') {
+			return objectCapitalize(item);
+		}
+		return item;
+	});
+	keys.forEach((key, index) => {
+		temp_body[key] = temp_values[index];
+	});
+	return temp_body;
 }

@@ -1,5 +1,5 @@
 import prisma from '../config/db';
-import { companies, staff } from '@prisma/client';
+import { companies } from '@prisma/client';
 import {
 	IFindAll,
 	IStore,

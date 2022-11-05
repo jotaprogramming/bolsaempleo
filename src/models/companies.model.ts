@@ -10,6 +10,7 @@ import { IResult } from '../interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
 import { companies } from '@prisma/client';
+import { objectCapitalize } from '../utils/formatting';
 
 class companiesModel
 	implements
@@ -21,7 +22,8 @@ class companiesModel
 {
 	async store(body: companies): Promise<IResult> {
 		try {
-			const result: companies = await Repository.store(body);
+			const data: companies = await objectCapitalize(body);
+			const result: companies = await Repository.store(data);
 			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);
@@ -51,7 +53,8 @@ class companiesModel
 	}
 	async update(id: number, body: companies): Promise<IResult> {
 		try {
-			const result: companies = await Repository.update(id, body);
+			const data: companies = await objectCapitalize(body);
+			const result: companies = await Repository.update(id, data);
 			if (Object.keys(result).length === 0) {
 				return HTTPResponse(204);
 			}
@@ -65,6 +68,10 @@ class companiesModel
 			const result: companies = await Repository.delete(id);
 			return HTTPResponse(200, result);
 		} catch (error: any) {
+			console.log(
+				'🚀 ~ file: companies.model.ts ~ line 71 ~ delete ~ error',
+				error
+			);
 			return typeError(error);
 		}
 	}

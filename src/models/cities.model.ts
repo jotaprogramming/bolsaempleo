@@ -10,6 +10,7 @@ import { IResult } from '../interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
 import { cities } from '@prisma/client';
+import { objectCapitalize } from '../utils/formatting';
 
 class citiesModel
 	implements
@@ -21,7 +22,8 @@ class citiesModel
 {
 	async store(body: cities): Promise<IResult> {
 		try {
-			const result: cities = await Repository.store(body);
+			const data: cities = await objectCapitalize(body);
+			const result: cities = await Repository.store(data);
 			return HTTPResponse(201, result);
 		} catch (error: any) {
 			return typeError(error);
@@ -51,7 +53,8 @@ class citiesModel
 	}
 	async update(id: number, body: cities): Promise<IResult> {
 		try {
-			const result: cities = await Repository.update(id, body);
+			const data: cities = await objectCapitalize(body);
+			const result: cities = await Repository.update(id, data);
 			if (Object.keys(result).length === 0) {
 				return HTTPResponse(204);
 			}
