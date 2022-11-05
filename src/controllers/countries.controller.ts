@@ -4,7 +4,6 @@ import {
 	IFindOne,
 	IStore,
 	IUpdate,
-	IDelete,
 	IDestroy,
 } from '../interfaces/controller.interfaces';
 import CountriesModel from '../models/countries.model';

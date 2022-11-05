@@ -7,7 +7,7 @@ import {
 	IDestroy,
 } from '../interfaces/repositories.interface';
 import { users } from '@prisma/client';
-import '../utils/encrypt';
+import '../middlewares/encrypt';
 
 class UsersRepository
 	implements

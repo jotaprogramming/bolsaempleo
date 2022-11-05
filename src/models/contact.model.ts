@@ -33,17 +33,17 @@ class contactModel
 				});
 			}
 			const rangePhone = numberSize(phone, 6, 6);
-			if(rangePhone){
+			if (rangePhone) {
 				return HTTPResponse(200, {
 					message: rangePhone,
-					field: 'phone'
+					field: 'phone',
 				});
 			}
 			const rangeTelephone = numberSize(telephone, 10, 10);
-			if(rangeTelephone){
+			if (rangeTelephone) {
 				return HTTPResponse(200, {
 					message: rangeTelephone,
-					field: 'telephone'
+					field: 'telephone',
 				});
 			}
 			const result: contact = await Repository.store(body);

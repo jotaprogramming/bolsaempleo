@@ -1,18 +1,6 @@
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
-import {
-	IFindAll,
-	IFindOne,
-	IStore,
-	IUpdate,
-	IDelete,
-	IDestroy,
-} from '../interfaces/controller.interfaces';
-import CountriesModel from '../models/countries.model';
-import { ICountry } from '../interfaces/countries.interfaces';
-import { ParamsDictionary } from 'express-serve-static-core';
-import { ParsedQs } from 'qs';
 
 const json_settings = fs.readFileSync(
 	path.join(__dirname, '../settings/settings.json'),

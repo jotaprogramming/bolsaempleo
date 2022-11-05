@@ -4,6 +4,11 @@ import { IPrismaError } from '../interfaces/error.interface';
 import { IResult } from '../interfaces/result.interface';
 import httpResponse from './httpResponse';
 
+/**
+ * It takes an error object and returns a response object
+ * @param {any} error - any - The error object that is returned from the Prisma client.
+ * @returns An object with a code and a message.
+ */
 export function knownRequestError(error: any): IResult {
 	let result: IPrismaError = {
 		code: error.code,
@@ -25,6 +30,11 @@ export function knownRequestError(error: any): IResult {
 	return httpResponse(400, result);
 }
 
+/**
+ * It returns a function that takes an error object and returns an object with a message property
+ * @param {any} error - any
+ * @returns An object with a status property and a message property.
+ */
 export function validationError(error: any): IResult {
 	// let result: IPrismaError = {
 	// 	message: error.message,

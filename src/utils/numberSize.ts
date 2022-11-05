@@ -6,13 +6,13 @@
  * @param {number} max - The maximum number of digits allowed.
  * @returns A function that takes 3 parameters.
  */
-export default function numberSize(num: number, min: number, max: number){
-    const NUM = num.toString()
-    if (NUM.length < min ){
-        return `El valor es inferior al mínimo aceptado.`
-    }
-    if (NUM.length > max ){
-        return `El valor es superior al máximo aceptado.`
-    }
-    return null
+export default function numberSize(num: number, min: number, max: number) {
+	const NUM = num.toString();
+	if (NUM.length < min) {
+		return `El valor es inferior al mínimo aceptado.`;
+	}
+	if (NUM.length > max) {
+		return `El valor es superior al máximo aceptado.`;
+	}
+	return null;
 }

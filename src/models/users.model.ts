@@ -1,5 +1,4 @@
 import Repository from '../repositories/users.repository';
-// import { users, users } from '../interfaces/users.interfaces';
 import {
 	IFindAll,
 	IFindOne,

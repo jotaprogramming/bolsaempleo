@@ -1,5 +1,4 @@
 import prisma from '../config/db';
-// import { ICountry, countries } from '../interfaces/countries.interfaces';
 import { countries } from '@prisma/client';
 import {
 	IFindAll,

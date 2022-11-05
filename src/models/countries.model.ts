@@ -1,5 +1,4 @@
 import Repository from '../repositories/countries.repository';
-// import { countries, countries } from '../interfaces/countries.interfaces';
 import {
 	IFindAll,
 	IFindOne,

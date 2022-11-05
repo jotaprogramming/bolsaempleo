@@ -1,7 +1,5 @@
 import { users } from '@prisma/client';
 import { Request, Response } from 'express';
-import { ParamsDictionary } from 'express-serve-static-core';
-import { ParsedQs } from 'qs';
 import {
 	IFindAll,
 	IFindOne,
@@ -12,7 +10,6 @@ import {
 } from '../interfaces/controller.interfaces';
 import { IResult } from '../interfaces/result.interface';
 import Model from '../models/users.model';
-import verifyEmail from '../utils/email';
 
 class UsersController
 	implements
