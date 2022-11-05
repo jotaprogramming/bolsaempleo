@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Portal web de una bolsa de empleo para los egresados de una entidad de educación superior, COL",
   "main": "index.js",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "ts-node ./src/index.ts",
@@ -30,6 +33,7 @@
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/morgan": "^1.9.3",
+    "@types/node": "^18.11.9",
     "prettier": "2.7.1",
     "prisma": "^4.5.0",
     "ts-node": "^10.9.1",
