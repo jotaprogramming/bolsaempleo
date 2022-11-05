@@ -286,7 +286,8 @@ model job_title {
 }
 
 model staff {
-  stf_id          Int               @id
+  stf_id          Int               @id @default(autoincrement())
+  stf_ced         Int
   stf_name        String            @db.VarChar(100)
   stf_lastname    String            @db.VarChar(100)
   stf_telephone   Int

@@ -5,7 +5,7 @@ import {
 	IStore,
 	IUpdate,
 	IFindOne,
-	IDelete
+	IDelete,
 } from '../interfaces/repositories.interface';
 
 class companiesRepository
@@ -30,9 +30,9 @@ class companiesRepository
 				cities: true,
 				companies_staff: {
 					include: {
-						staff: true
-					}
-				}
+						staff: true,
+					},
+				},
 			},
 		});
 	}
@@ -43,6 +43,11 @@ class companiesRepository
 			},
 			include: {
 				cities: true,
+				companies_staff: {
+					include: {
+						staff: true,
+					},
+				},
 			},
 		});
 	}
@@ -53,6 +58,11 @@ class companiesRepository
 			},
 			include: {
 				cities: true,
+				companies_staff: {
+					include: {
+						staff: true,
+					},
+				},
 			},
 			data: data,
 		});

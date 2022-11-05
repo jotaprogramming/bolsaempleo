@@ -1,4 +1,4 @@
-import Repository from '../repositories/companies.repository';
+import Repository from '../repositories/staff.repository';
 import {
 	IFindAll,
 	IFindOne,
@@ -9,21 +9,21 @@ import {
 import { IResult } from '../interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
-import { companies } from '@prisma/client';
+import { staff } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
 
-class companiesModel
+class staffModel
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
-		IStore<companies>,
-		IUpdate<number, companies>,
+		IStore<staff>,
+		IUpdate<number, staff>,
 		IDelete<number>
 {
-	async store(body: companies): Promise<IResult> {
+	async store(body: staff): Promise<IResult> {
 		try {
-			const data: companies = await objectCapitalize(body);
-			const result: companies = await Repository.store(data);
+			const data: staff = await objectCapitalize(body);
+			const result: staff = await Repository.store(data);
 			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);
@@ -31,7 +31,7 @@ class companiesModel
 	}
 	async findAll(): Promise<IResult> {
 		try {
-			const result: Array<companies> = await Repository.findAll();
+			const result: Array<staff> = await Repository.findAll();
 			if (result.length === 0) {
 				return HTTPResponse(204);
 			}
@@ -42,7 +42,7 @@ class companiesModel
 	}
 	async findOne(id: number): Promise<IResult> {
 		try {
-			const result: companies | null = await Repository.findOne(id);
+			const result: staff | null = await Repository.findOne(id);
 			if (!result) {
 				return HTTPResponse(204);
 			}
@@ -51,10 +51,10 @@ class companiesModel
 			return typeError(error);
 		}
 	}
-	async update(id: number, body: companies): Promise<IResult> {
+	async update(id: number, body: staff): Promise<IResult> {
 		try {
-			const data: companies = await objectCapitalize(body);
-			const result: companies = await Repository.update(id, data);
+			const data: staff = await objectCapitalize(body);
+			const result: staff = await Repository.update(id, data);
 			if (Object.keys(result).length === 0) {
 				return HTTPResponse(204);
 			}
@@ -65,11 +65,11 @@ class companiesModel
 	}
 	async delete(id: number): Promise<IResult> {
 		try {
-			const result: companies = await Repository.delete(id);
+			const result: staff = await Repository.delete(id);
 			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);
 		}
 	}
 }
-export default new companiesModel();
+export default new staffModel();

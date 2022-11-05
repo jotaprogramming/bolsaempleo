@@ -76,7 +76,8 @@ CREATE TABLE job_title(
 DROP TABLE IF EXISTS staff;
 
 CREATE TABLE staff(
-    stf_id INT PRIMARY KEY NOT NULL COMMENT 'Identification document number',
+    stf_id INT PRIMARY KEY AUTO_INCREMENT,
+    stf_ced INT NOT NULL COMMENT 'Identification document number',
     stf_name VARCHAR(100) NOT NULL,
     stf_lastname VARCHAR(100) NOT NULL,
     stf_telephone INT NOT NULL,

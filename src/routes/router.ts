@@ -5,6 +5,7 @@ import countryRoutes from './countries.routes';
 import districtsRoutes from './districts.routes';
 import citiesRoutes from './cities.routes';
 import companiesRoutes from './companies.routes';
+import staffRoutes from './staff.routes';
 import contactRoutes from './contact.routes';
 import settingRoutes from './settings.routes';
 
@@ -20,6 +21,7 @@ const router = (app: Express) => {
 	app.use('/districts', districtsRoutes);
 	app.use('/cities', citiesRoutes);
 	app.use('/companies', companiesRoutes);
+	app.use('/staff', staffRoutes);
 	app.use('/contact', contactRoutes);
 	app.use('/settings', settingRoutes);
 };
