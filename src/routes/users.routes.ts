@@ -10,6 +10,5 @@ router.post('/users', controller.store);
 router.get('/users/:id', controller.findOne);
 router.put('/users/:id', controller.update);
 router.post('/users/:id', controller.delete);
-router.delete('/users/:id', controller.destroy);
 
 export default router;

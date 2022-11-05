@@ -5,7 +5,6 @@ import {
 	IStore,
 	IUpdate,
 	IDelete,
-	IDestroy,
 } from '../interfaces/model.interface';
 import { IResult } from '../interfaces/result.interface';
 import typeError from '../utils/error';
@@ -20,8 +19,7 @@ class UsersModel
 		IFindOne<number>,
 		IStore<users>,
 		IUpdate<number, users>,
-		IDelete<number>,
-		IDestroy<number>
+		IDelete<number>
 {
 	async store(body: users): Promise<IResult> {
 		try {
@@ -112,14 +110,6 @@ class UsersModel
 		try {
 			const result: users = await Repository.delete(id);
 			return HTTPResponse(200, result);
-		} catch (error: any) {
-			return typeError(error);
-		}
-	}
-	async destroy(id: number): Promise<IResult> {
-		try {
-			const result: users = await Repository.destroy(id);
-			return HTTPResponse(204, result);
 		} catch (error: any) {
 			return typeError(error);
 		}

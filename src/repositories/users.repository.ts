@@ -4,7 +4,7 @@ import {
 	IStore,
 	IUpdate,
 	IFindOne,
-	IDestroy,
+	IDelete,
 } from '../interfaces/repositories.interface';
 import { users } from '@prisma/client';
 import '../middlewares/encrypt';
@@ -15,7 +15,7 @@ class UsersRepository
 		IFindAll<users>,
 		IFindOne<number, users>,
 		IUpdate<number, users>,
-		IDestroy<number, users>
+		IDelete<number, users>
 {
 	async store(data: users): Promise<users> {
 		return await prisma.users.create({
@@ -65,13 +65,6 @@ class UsersRepository
 			},
 			data: {
 				usr_deleted_at: new Date(Date.now()),
-			},
-		});
-	}
-	async destroy(id: number): Promise<users> {
-		return await prisma.users.delete({
-			where: {
-				usr_id: id,
 			},
 		});
 	}
