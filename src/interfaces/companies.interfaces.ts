@@ -1,3 +1,8 @@
-import { companies, companies_staff, staff } from '@prisma/client';
+import { companies, staff, users } from '@prisma/client';
 
-export interface ICompanies extends companies, companies_staff, staff {}
+export interface ICompanies {
+	company: companies;
+	user: users;
+	legal_representative: staff;
+	human_resources: staff;
+}

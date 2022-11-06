@@ -5,6 +5,7 @@ import countryRoutes from './countries.routes';
 import districtsRoutes from './districts.routes';
 import citiesRoutes from './cities.routes';
 import companiesRoutes from './companies.routes';
+import companiesStaffRoutes from './companies_staff.routes';
 import staffRoutes from './staff.routes';
 import graduatesRoutes from './graduates.routes';
 import contactRoutes from './contact.routes';
@@ -22,6 +23,7 @@ const router = (app: Express) => {
 	app.use('/districts', districtsRoutes);
 	app.use('/cities', citiesRoutes);
 	app.use('/companies', companiesRoutes);
+	app.use('/companies_staff', companiesStaffRoutes);
 	app.use('/staff', staffRoutes);
 	app.use('/graduates', graduatesRoutes);
 	app.use('/contact', contactRoutes);

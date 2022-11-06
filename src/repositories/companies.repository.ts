@@ -27,10 +27,22 @@ class companiesRepository
 				com_name: 'asc',
 			},
 			include: {
-				cities: true,
+				cities: {
+					include: {
+						district: {
+							include: {
+								countries: true
+							}
+						}
+					}
+				},
 				companies_staff: {
 					include: {
-						staff: true,
+						staff: {
+							include: {
+								job_title: true,
+							},
+						},
 					},
 				},
 			},
@@ -42,12 +54,29 @@ class companiesRepository
 				com_nit: id,
 			},
 			include: {
-				cities: true,
+				cities: {
+					include: {
+						district: {
+							include: {
+								countries: true
+							}
+						}
+					}
+				},
 				companies_staff: {
 					include: {
-						staff: true,
+						staff: {
+							include: {
+								job_title: true,
+							},
+						},
 					},
 				},
+				users_companies: {
+					include: {
+						users: true
+					}
+				}
 			},
 		});
 	}
@@ -57,12 +86,29 @@ class companiesRepository
 				com_nit: id,
 			},
 			include: {
-				cities: true,
+				cities: {
+					include: {
+						district: {
+							include: {
+								countries: true
+							}
+						}
+					}
+				},
 				companies_staff: {
 					include: {
-						staff: true,
+						staff: {
+							include: {
+								job_title: true,
+							},
+						},
 					},
 				},
+				users_companies: {
+					include: {
+						users: true
+					}
+				}
 			},
 			data: data,
 		});
