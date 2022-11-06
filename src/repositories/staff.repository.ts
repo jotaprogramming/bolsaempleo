@@ -6,7 +6,7 @@ import {
 	IUpdate,
 	IFindOne,
 	IDelete,
-} from '../interfaces/repositories.interface';
+} from '../helpers/interfaces/repositories.interface';
 
 interface IId {
 	stf_id: number;

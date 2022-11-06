@@ -4,7 +4,7 @@ import {
 	PrismaClientUnknownRequestError,
 	PrismaClientValidationError,
 } from '@prisma/client/runtime';
-import { IResult } from '../interfaces/result.interface';
+import { IResult } from '../helpers/interfaces/result.interface';
 import httpResponse from './httpResponse';
 import { knownRequestError, validationError } from './prismaError';
 

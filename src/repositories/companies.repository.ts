@@ -6,7 +6,7 @@ import {
 	IUpdate,
 	IFindOne,
 	IDelete,
-} from '../interfaces/repositories.interface';
+} from '../helpers/interfaces/repositories.interface';
 
 class companiesRepository
 	implements
@@ -31,10 +31,10 @@ class companiesRepository
 					include: {
 						district: {
 							include: {
-								countries: true
-							}
-						}
-					}
+								countries: true,
+							},
+						},
+					},
 				},
 				companies_staff: {
 					include: {
@@ -58,10 +58,10 @@ class companiesRepository
 					include: {
 						district: {
 							include: {
-								countries: true
-							}
-						}
-					}
+								countries: true,
+							},
+						},
+					},
 				},
 				companies_staff: {
 					include: {
@@ -74,9 +74,9 @@ class companiesRepository
 				},
 				users_companies: {
 					include: {
-						users: true
-					}
-				}
+						users: true,
+					},
+				},
 			},
 		});
 	}
@@ -90,10 +90,10 @@ class companiesRepository
 					include: {
 						district: {
 							include: {
-								countries: true
-							}
-						}
-					}
+								countries: true,
+							},
+						},
+					},
 				},
 				companies_staff: {
 					include: {
@@ -106,9 +106,9 @@ class companiesRepository
 				},
 				users_companies: {
 					include: {
-						users: true
-					}
-				}
+						users: true,
+					},
+				},
 			},
 			data: data,
 		});

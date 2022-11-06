@@ -6,7 +6,7 @@ import {
 	IUpdate,
 	IFindOne,
 	IDelete,
-} from '../interfaces/repositories.interface';
+} from '../helpers/interfaces/repositories.interface';
 
 class graduatesRepository
 	implements

@@ -5,10 +5,10 @@ import {
 	IStore,
 	IUpdate,
 	IDestroy,
-} from '../interfaces/controller.interfaces';
+} from '../helpers/interfaces/controller.interfaces';
 import CountriesModel from '../models/countries.model';
 import { countries } from '@prisma/client';
-import { IResult } from '../interfaces/result.interface';
+import { IResult } from '../helpers/interfaces/result.interface';
 
 class CountriesController
 	implements

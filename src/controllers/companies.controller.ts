@@ -5,10 +5,10 @@ import {
 	IStore,
 	IUpdate,
 	IDelete,
-} from '../interfaces/controller.interfaces';
+} from '../helpers/interfaces/controller.interfaces';
 import Model from '../models/companies.model';
 import { companies } from '@prisma/client';
-import { IResult } from '../interfaces/result.interface';
+import { IResult } from '../helpers/interfaces/result.interface';
 
 class companiesController
 	implements

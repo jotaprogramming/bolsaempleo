@@ -1,4 +1,4 @@
-import { IResult } from '../interfaces/result.interface';
+import { IResult } from '../helpers/interfaces/result.interface';
 import { ReasonPhrases } from 'http-status-codes';
 
 /**

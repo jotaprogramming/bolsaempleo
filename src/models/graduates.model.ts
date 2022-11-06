@@ -5,13 +5,13 @@ import {
 	IStore,
 	IUpdate,
 	IDelete,
-} from '../interfaces/model.interface';
-import { IResult } from '../interfaces/result.interface';
+} from '../helpers/interfaces/model.interface';
+import { IResult } from '../helpers/interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
 import { graduates } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
-import { IGraduate } from '../interfaces/gradutes.interface';
+import { IGraduate } from '../helpers/interfaces/gradutes.interface';
 
 class graduatesModel
 	implements

@@ -6,8 +6,8 @@ import {
 	IStore,
 	IUpdate,
 	IDelete,
-} from '../interfaces/controller.interfaces';
-import { IResult } from '../interfaces/result.interface';
+} from '../helpers/interfaces/controller.interfaces';
+import { IResult } from '../helpers/interfaces/result.interface';
 import Model from '../models/users.model';
 
 class UsersController

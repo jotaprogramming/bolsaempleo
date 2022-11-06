@@ -6,7 +6,7 @@ import {
 	IUpdate,
 	IFindOne,
 	IDestroy,
-} from '../interfaces/repositories.interface';
+} from '../helpers/interfaces/repositories.interface';
 
 class CountriesRepository
 	implements

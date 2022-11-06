@@ -5,8 +5,8 @@ import {
 	IStore,
 	IUpdate,
 	IDestroy,
-} from '../interfaces/model.interface';
-import { IResult } from '../interfaces/result.interface';
+} from '../helpers/interfaces/model.interface';
+import { IResult } from '../helpers/interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
 import { cities } from '@prisma/client';

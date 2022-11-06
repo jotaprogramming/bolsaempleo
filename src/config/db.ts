@@ -1,4 +1,4 @@
-import { IORM } from '../interfaces/db.interface';
+import { IORM } from '../helpers/interfaces/db.interface';
 import { PrismaClient } from '@prisma/client';
 
 class DBPrisma implements IORM<PrismaClient> {

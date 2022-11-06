@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { IStore, IDelete } from '../interfaces/controller.interfaces';
+import { IStore, IDelete } from '../helpers/interfaces/controller.interfaces';
 import Model from '../models/companies_staff.model';
 import companiesModel from '../models/companies.model';
 import { companies_staff, companies, staff, users } from '@prisma/client';
-import { IResult } from '../interfaces/result.interface';
-import { ICompanies } from '../interfaces/companies.interfaces';
+import { IResult } from '../helpers/interfaces/result.interface';
+import { ICompanies } from '../helpers/interfaces/companies.interfaces';
 import staffModel from '../models/staff.model';
 import usersModel from '../models/users.model';
 

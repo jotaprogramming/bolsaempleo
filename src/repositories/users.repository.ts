@@ -5,9 +5,9 @@ import {
 	IUpdate,
 	IFindOne,
 	IDelete,
-} from '../interfaces/repositories.interface';
+} from '../helpers/interfaces/repositories.interface';
 import { users } from '@prisma/client';
-import '../middlewares/encrypt';
+import '../helpers/middlewares/encrypt';
 
 class UsersRepository
 	implements

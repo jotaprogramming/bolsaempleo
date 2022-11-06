@@ -1,7 +1,7 @@
 import messages from '../settings/settings.json';
 import defaultErrors from '../settings/prisma-errors.json';
-import { IPrismaError } from '../interfaces/error.interface';
-import { IResult } from '../interfaces/result.interface';
+import { IPrismaError } from '../helpers/interfaces/error.interface';
+import { IResult } from '../helpers/interfaces/result.interface';
 import httpResponse from './httpResponse';
 
 /**

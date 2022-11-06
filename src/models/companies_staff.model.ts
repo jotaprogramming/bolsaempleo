@@ -1,5 +1,5 @@
 import Repository from '../repositories/companies_staff.repository';
-import { IResult } from '../interfaces/result.interface';
+import { IResult } from '../helpers/interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
 import {

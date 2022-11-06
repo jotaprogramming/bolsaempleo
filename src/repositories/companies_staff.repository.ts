@@ -1,6 +1,12 @@
 import prisma from '../config/db';
-import { companies, companies_staff, staff, users, users_companies } from '@prisma/client';
-import '../middlewares/encrypt';
+import {
+	companies,
+	companies_staff,
+	staff,
+	users,
+	users_companies,
+} from '@prisma/client';
+import '../helpers/middlewares/encrypt';
 
 class companies_staffRepository {
 	async store(
