@@ -42,30 +42,6 @@ CREATE TABLE contract_types(
     ct_name VARCHAR(100) NOT NULL UNIQUE
 );
 
--- DROP TABLE IF EXISTS legal_representative;
-
--- CREATE TABLE legal_representative(
---     lg_id INT PRIMARY KEY NOT NULL COMMENT 'Identification document number',
---     lg_name VARCHAR(100) NOT NULL,
---     lg_lastname VARCHAR(100) NOT NULL,
---     lg_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     lg_updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
---     lg_deleted_at TIMESTAMP NULL
--- );
-
--- DROP TABLE IF EXISTS human_resources;
-
--- CREATE TABLE human_resources(
---     hr_id INT PRIMARY KEY NOT NULL COMMENT 'Identification document number',
---     hr_name VARCHAR(100) NOT NULL,
---     hr_lastname VARCHAR(100) NOT NULL,
---     hr_telephone INT NOT NULL,
---     hr_email VARCHAR(100) NOT NULL,
---     hr_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     hr_updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
---     hr_deleted_at TIMESTAMP NULL
--- );
-
 DROP TABLE IF EXISTS job_title;
 
 CREATE TABLE job_title(
@@ -80,7 +56,7 @@ CREATE TABLE staff(
     stf_ced INT NOT NULL COMMENT 'Identification document number',
     stf_name VARCHAR(100) NOT NULL,
     stf_lastname VARCHAR(100) NOT NULL,
-    stf_telephone INT NOT NULL,
+    stf_telephone VARCHAR(11) NOT NULL,
     stf_email VARCHAR(100) NOT NULL,
     stf_jt_id INT NOT NULL COMMENT 'Job title id',
     stf_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -174,7 +150,7 @@ CREATE TABLE contact(
     con_id INT PRIMARY KEY AUTO_INCREMENT,
     con_email VARCHAR(100) NOT NULL,
     con_phone INT NOT NULL COMMENT 'Landline telephone number',
-    con_telephone INT NOT NULL COMMENT 'Smartphone number'
+    con_telephone VARCHAR(11) NOT NULL COMMENT 'Smartphone number'
 );
 
 DROP TABLE IF EXISTS contact_sn;

@@ -12,7 +12,7 @@ import HTTPResponse from '../utils/httpResponse';
 import { district } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
 
-class districtModel
+class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
@@ -72,4 +72,4 @@ class districtModel
 		}
 	}
 }
-export default new districtModel();
+export default new Model();

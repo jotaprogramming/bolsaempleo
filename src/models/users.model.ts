@@ -13,7 +13,7 @@ import bcrypt from 'bcrypt';
 import verifyEmail from '../utils/email';
 import { users } from '@prisma/client';
 
-class UsersModel
+class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
@@ -31,7 +31,7 @@ class UsersModel
 				});
 			}
 			const result: users = await Repository.store(body);
-			return HTTPResponse(200, result);
+			return HTTPResponse(201, result);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -115,4 +115,4 @@ class UsersModel
 		}
 	}
 }
-export default new UsersModel();
+export default new Model();

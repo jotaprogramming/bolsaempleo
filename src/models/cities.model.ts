@@ -12,7 +12,7 @@ import HTTPResponse from '../utils/httpResponse';
 import { cities } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
 
-class citiesModel
+class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
@@ -72,4 +72,4 @@ class citiesModel
 		}
 	}
 }
-export default new citiesModel();
+export default new Model();

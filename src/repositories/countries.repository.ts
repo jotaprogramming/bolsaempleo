@@ -8,7 +8,7 @@ import {
 	IDestroy,
 } from '../helpers/interfaces/repositories.interface';
 
-class CountriesRepository
+class Repository
 	implements
 		IStore<countries>,
 		IFindAll<countries>,
@@ -52,4 +52,4 @@ class CountriesRepository
 	}
 }
 
-export default new CountriesRepository();
+export default new Repository();

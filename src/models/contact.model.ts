@@ -13,7 +13,7 @@ import { contact } from '@prisma/client';
 import verifyEmail from '../utils/email';
 import numberSize from '../utils/numberSize';
 
-class contactModel
+class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
@@ -21,30 +21,38 @@ class contactModel
 		IUpdate<number, contact>,
 		IDestroy<number>
 {
+	async refactor(body: contact): Promise<contact | {}> {
+		const email: string = body.con_email;
+		const phone: number = body.con_phone;
+		const telephone: string = body.con_telephone;
+		const isEmail = verifyEmail(email);
+		if (!isEmail) {
+			return {
+				message: '¡El valor ingresado no es un correo electrónico!',
+				field: 'con_email',
+			};
+		}
+		const rangePhone = numberSize(phone, 7, 7);
+		if (rangePhone) {
+			return {
+				message: rangePhone,
+				field: 'con_phone',
+			};
+		}
+		const rangeTelephone = numberSize(telephone, 10, 10);
+		if (rangeTelephone) {
+			return {
+				message: rangeTelephone,
+				field: 'con_telephone',
+			};
+		}
+		return body;
+	}
 	async store(body: contact): Promise<IResult> {
 		try {
-			const email: string = body.con_email;
-			const phone: number = body.con_phone;
-			const telephone: number = body.con_telephone;
-			const isEmail = verifyEmail(email);
-			if (!isEmail) {
-				return HTTPResponse(200, {
-					message: '¡El valor ingresado no es un correo electrónico!',
-				});
-			}
-			const rangePhone = numberSize(phone, 6, 6);
-			if (rangePhone) {
-				return HTTPResponse(200, {
-					message: rangePhone,
-					field: 'phone',
-				});
-			}
-			const rangeTelephone = numberSize(telephone, 10, 10);
-			if (rangeTelephone) {
-				return HTTPResponse(200, {
-					message: rangeTelephone,
-					field: 'telephone',
-				});
+			const data = await this.refactor(body);
+			if ('message' in data) {
+				return HTTPResponse(200, data);
 			}
 			const result: contact = await Repository.store(body);
 			return HTTPResponse(201, result);
@@ -76,12 +84,9 @@ class contactModel
 	}
 	async update(id: number, body: contact): Promise<IResult> {
 		try {
-			const email: string = body.con_email;
-			const isEmail = verifyEmail(email);
-			if (!isEmail) {
-				return HTTPResponse(200, {
-					message: '¡El valor ingresado no es un correo electrónico!',
-				});
+			const data = await this.refactor(body);
+			if ('message' in data) {
+				return HTTPResponse(200, data);
 			}
 			const result: contact = await Repository.update(id, body);
 			if (Object.keys(result).length === 0) {
@@ -101,4 +106,4 @@ class contactModel
 		}
 	}
 }
-export default new contactModel();
+export default new Model();

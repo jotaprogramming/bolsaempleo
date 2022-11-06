@@ -8,7 +8,7 @@ import {
 	IDelete,
 } from '../helpers/interfaces/repositories.interface';
 
-class companiesRepository
+class Repository
 	implements
 		IStore<companies>,
 		IFindAll<companies>,
@@ -125,4 +125,4 @@ class companiesRepository
 	}
 }
 
-export default new companiesRepository();
+export default new Repository();

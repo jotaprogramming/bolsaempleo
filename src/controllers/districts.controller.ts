@@ -10,7 +10,7 @@ import Model from '../models/districts.model';
 import { district } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
 
-class districtController
+class Controller
 	implements
 		IFindAll<Request, Response>,
 		IStore<Request, Response>,
@@ -46,4 +46,4 @@ class districtController
 	}
 }
 
-export default new districtController();
+export default new Controller();

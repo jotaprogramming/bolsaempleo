@@ -13,7 +13,7 @@ import { objectCapitalize } from '../utils/formatting';
 import verifyEmail from '../utils/email';
 import numberSize from '../utils/numberSize';
 
-class companies_staffModel {
+class Model {
 	async refactorStaff(body: staff): Promise<staff | IResult> {
 		const data: staff = body;
 		const names = await objectCapitalize({
@@ -27,7 +27,7 @@ class companies_staffModel {
 				field: 'stf_email',
 			});
 		}
-		const rangePhone = numberSize(data.stf_telephone, 6, 10);
+		const rangePhone = numberSize(data.stf_telephone, 7, 10);
 		if (rangePhone) {
 			return HTTPResponse(200, {
 				message: rangePhone,
@@ -54,7 +54,7 @@ class companies_staffModel {
 				user,
 				fstaff
 			);
-			return HTTPResponse(200, result);
+			return HTTPResponse(201, result);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -92,4 +92,4 @@ class companies_staffModel {
 		}
 	}
 }
-export default new companies_staffModel();
+export default new Model();

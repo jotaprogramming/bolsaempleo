@@ -14,7 +14,7 @@ import { objectCapitalize } from '../utils/formatting';
 import verifyEmail from '../utils/email';
 import numberSize from '../utils/numberSize';
 
-class staffModel
+class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
@@ -52,7 +52,7 @@ class staffModel
 				return data;
 			}
 			const result: staff = await Repository.store(data);
-			return HTTPResponse(200, result);
+			return HTTPResponse(201, result);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -103,4 +103,4 @@ class staffModel
 		}
 	}
 }
-export default new staffModel();
+export default new Model();

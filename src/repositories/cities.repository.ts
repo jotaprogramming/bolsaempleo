@@ -8,7 +8,7 @@ import {
 	IDestroy,
 } from '../helpers/interfaces/repositories.interface';
 
-class citiesRepository
+class Repository
 	implements
 		IStore<cities>,
 		IFindAll<cities>,
@@ -64,4 +64,4 @@ class citiesRepository
 	}
 }
 
-export default new citiesRepository();
+export default new Repository();

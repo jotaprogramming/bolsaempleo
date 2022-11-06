@@ -10,7 +10,7 @@ import Model from '../models/cities.model';
 import { cities } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
 
-class citiesController
+class Controller
 	implements
 		IFindAll<Request, Response>,
 		IStore<Request, Response>,
@@ -45,4 +45,4 @@ class citiesController
 	}
 }
 
-export default new citiesController();
+export default new Controller();

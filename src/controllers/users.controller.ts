@@ -10,7 +10,7 @@ import {
 import { IResult } from '../helpers/interfaces/result.interface';
 import Model from '../models/users.model';
 
-class UsersController
+class Controller
 	implements
 		IFindAll<Request, Response>,
 		IStore<Request, Response>,
@@ -60,4 +60,4 @@ class UsersController
 	}
 }
 
-export default new UsersController();
+export default new Controller();

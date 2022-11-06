@@ -29,7 +29,7 @@ model cities {
   district        district    @relation(fields: [cty_district_id], references: [dis_id], onDelete: NoAction, map: "fk_cty_district_id")
   companies       companies[]
   graduates       graduates[]
-  places          offices[]
+  offices         offices[]
 
   @@index([cty_district_id], map: "fk_cty_district_id")
 }
@@ -54,9 +54,9 @@ model contact {
   con_id        Int          @id @default(autoincrement())
   con_email     String       @db.VarChar(100)
   con_phone     Int
-  con_telephone Int
+  con_telephone String       @db.VarChar(11)
   contact_sn    contact_sn[]
-  places        offices[]
+  offices       offices[]
 }
 
 model contact_sn {
@@ -290,7 +290,7 @@ model staff {
   stf_ced         Int
   stf_name        String            @db.VarChar(100)
   stf_lastname    String            @db.VarChar(100)
-  stf_telephone   Int
+  stf_telephone   String            @db.VarChar(11)
   stf_email       String            @db.VarChar(100)
   stf_jt_id       Int
   stf_created_at  DateTime          @default(now()) @db.Timestamp(0)

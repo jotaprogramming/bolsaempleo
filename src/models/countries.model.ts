@@ -12,7 +12,7 @@ import HTTPResponse from '../utils/httpResponse';
 import { countries } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
 
-class CountriesModel
+class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
@@ -70,13 +70,6 @@ class CountriesModel
 		} catch (error: any) {
 			return typeError(error);
 		}
-		/*
-		try {
-			return HTTPResponse(204);
-		} catch (error: any) {
-			return typeError(error);
-		}
-		*/
 	}
 }
-export default new CountriesModel();
+export default new Model();

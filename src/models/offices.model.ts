@@ -1,4 +1,4 @@
-import Repository from '../repositories/companies.repository';
+import Repository from '../repositories/offices.repository';
 import {
 	IFindAll,
 	IFindOne,
@@ -9,21 +9,21 @@ import {
 import { IResult } from '../helpers/interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
-import { companies } from '@prisma/client';
+import { offices } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
 
 class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
-		IStore<companies>,
-		IUpdate<number, companies>,
+		IStore<offices>,
+		IUpdate<number, offices>,
 		IDelete<number>
 {
-	async store(body: companies): Promise<IResult> {
+	async store(body: offices): Promise<IResult> {
 		try {
-			const data: companies = await objectCapitalize(body);
-			const result: companies = await Repository.store(data);
+			const data: offices = await objectCapitalize(body);
+			const result: offices = await Repository.store(data);
 			return HTTPResponse(201, result);
 		} catch (error: any) {
 			return typeError(error);
@@ -31,7 +31,7 @@ class Model
 	}
 	async findAll(): Promise<IResult> {
 		try {
-			const result: Array<companies> = await Repository.findAll();
+			const result: Array<offices> = await Repository.findAll();
 			if (result.length === 0) {
 				return HTTPResponse(204);
 			}
@@ -42,7 +42,7 @@ class Model
 	}
 	async findOne(id: number): Promise<IResult> {
 		try {
-			const result: companies | null = await Repository.findOne(id);
+			const result: offices | null = await Repository.findOne(id);
 			if (!result) {
 				return HTTPResponse(204);
 			}
@@ -51,10 +51,10 @@ class Model
 			return typeError(error);
 		}
 	}
-	async update(id: number, body: companies): Promise<IResult> {
+	async update(id: number, body: offices): Promise<IResult> {
 		try {
-			const data: companies = await objectCapitalize(body);
-			const result: companies = await Repository.update(id, data);
+			const data: offices = await objectCapitalize(body);
+			const result: offices = await Repository.update(id, data);
 			if (Object.keys(result).length === 0) {
 				return HTTPResponse(204);
 			}
@@ -65,7 +65,7 @@ class Model
 	}
 	async delete(id: number): Promise<IResult> {
 		try {
-			const result: companies = await Repository.delete(id);
+			const result: offices = await Repository.delete(id);
 			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);

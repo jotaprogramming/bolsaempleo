@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IStore, IDelete } from '../helpers/interfaces/controller.interfaces';
-import Model from '../models/companies_staff.model';
+import companiesStaffModel from '../models/companies_staff.model';
 import companiesModel from '../models/companies.model';
 import { companies_staff, companies, staff, users } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
@@ -17,12 +17,12 @@ class companies_staffController
 		const legal_representative: staff = body.legal_representative;
 		const human_resources: staff = body.human_resources;
 		const user: users = body.user;
-		const data1: IResult = await Model.store(
+		const data1: IResult = await companiesStaffModel.store(
 			company,
 			user,
 			legal_representative
 		);
-		const data2: IResult = await Model.store(
+		const data2: IResult = await companiesStaffModel.store(
 			company,
 			user,
 			human_resources
@@ -51,7 +51,9 @@ class companies_staffController
 			res.status(dataCompanies.status).json(dataCompanies.result);
 			return;
 		}
-		const dataCompaniesStaff: IResult = await Model.findStaff(parseInt(id));
+		const dataCompaniesStaff: IResult = await companiesStaffModel.findStaff(
+			parseInt(id)
+		);
 		if (dataCompaniesStaff.status !== 200) {
 			res.status(dataCompaniesStaff.status).json(
 				dataCompaniesStaff.result
@@ -71,7 +73,9 @@ class companies_staffController
 				dataStaff.push(staff.result);
 			}
 		}
-		const dataUsersCompanies: IResult = await Model.findUser(parseInt(id));
+		const dataUsersCompanies: IResult = await companiesStaffModel.findUser(
+			parseInt(id)
+		);
 		if (dataUsersCompanies.status !== 200) {
 			res.status(dataUsersCompanies.status).json(
 				dataUsersCompanies.result

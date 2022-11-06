@@ -8,7 +8,7 @@ const json_settings = fs.readFileSync(
 );
 // const settings = JSON.parse(json_settings);
 
-class SettingsController {
+class Controller {
 	findAll(req: Request, res: Response) {
 		res.json(JSON.parse(json_settings));
 	}
@@ -24,4 +24,4 @@ class SettingsController {
 	}
 }
 
-export default new SettingsController();
+export default new Controller();

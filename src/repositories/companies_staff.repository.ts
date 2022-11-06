@@ -8,7 +8,7 @@ import {
 } from '@prisma/client';
 import '../helpers/middlewares/encrypt';
 
-class companies_staffRepository {
+class Repository {
 	async store(
 		companies: companies,
 		user: users,
@@ -63,4 +63,4 @@ class companies_staffRepository {
 	}
 }
 
-export default new companies_staffRepository();
+export default new Repository();

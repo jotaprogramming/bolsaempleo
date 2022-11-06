@@ -8,14 +8,7 @@ import {
 	IDelete,
 } from '../helpers/interfaces/repositories.interface';
 
-interface IId {
-	stf_id: number;
-}
-interface ICed {
-	stf_ced: number;
-}
-
-class staffRepository
+class Repository
 	implements
 		IStore<staff>,
 		IFindAll<staff>,
@@ -71,4 +64,4 @@ class staffRepository
 	}
 }
 
-export default new staffRepository();
+export default new Repository();

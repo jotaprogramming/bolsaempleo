@@ -9,7 +9,7 @@ import {
 import { users } from '@prisma/client';
 import '../helpers/middlewares/encrypt';
 
-class UsersRepository
+class Repository
 	implements
 		IStore<users>,
 		IFindAll<users>,
@@ -41,6 +41,9 @@ class UsersRepository
 			orderBy: {
 				username: 'asc',
 			},
+			include: {
+				roles: true
+			}
 		});
 	}
 	async findOne(id: number): Promise<users | null> {
@@ -48,12 +51,18 @@ class UsersRepository
 			where: {
 				usr_id: id,
 			},
+			include: {
+				roles: true
+			}
 		});
 	}
 	async update(id: number, data: users): Promise<users> {
 		return await prisma.users.update({
 			where: {
 				usr_id: id,
+			},
+			include: {
+				roles: true
 			},
 			data: data,
 		});
@@ -70,4 +79,4 @@ class UsersRepository
 	}
 }
 
-export default new UsersRepository();
+export default new Repository();

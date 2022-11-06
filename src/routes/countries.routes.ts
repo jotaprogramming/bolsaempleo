@@ -1,12 +1,12 @@
 import { Router, Request, Response } from 'express';
-import CountriesController from '../controllers/countries.controller';
+import Controller from '../controllers/countries.controller';
 
 const router: Router = Router();
 
-router.get('/', CountriesController.findAll);
-router.post('/', CountriesController.store);
-router.get('/:id', CountriesController.findOne);
-router.put('/:id', CountriesController.update);
-router.delete('/:id', CountriesController.destroy);
+router.get('/', Controller.findAll);
+router.post('/', Controller.store);
+router.get('/:id', Controller.findOne);
+router.put('/:id', Controller.update);
+router.delete('/:id', Controller.destroy);
 
 export default router;

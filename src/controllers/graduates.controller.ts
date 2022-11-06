@@ -10,7 +10,7 @@ import Model from '../models/graduates.model';
 import { graduates } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
 
-class companiesController
+class Controller
 	implements
 		IFindAll<Request, Response>,
 		IStore<Request, Response>,
@@ -45,4 +45,4 @@ class companiesController
 	}
 }
 
-export default new companiesController();
+export default new Controller();

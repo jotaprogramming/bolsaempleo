@@ -8,7 +8,7 @@ import {
 	IDelete,
 } from '../helpers/interfaces/repositories.interface';
 
-class graduatesRepository
+class Repository
 	implements
 		IStore<graduates>,
 		IFindAll<graduates>,
@@ -115,4 +115,4 @@ class graduatesRepository
 	}
 }
 
-export default new graduatesRepository();
+export default new Repository();

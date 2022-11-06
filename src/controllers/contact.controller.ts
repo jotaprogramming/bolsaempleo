@@ -10,7 +10,7 @@ import Model from '../models/contact.model';
 import { contact } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
 
-class contactController
+class Controller
 	implements
 		IFindAll<Request, Response>,
 		IStore<Request, Response>,
@@ -45,4 +45,4 @@ class contactController
 	}
 }
 
-export default new contactController();
+export default new Controller();

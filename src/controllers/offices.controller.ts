@@ -6,8 +6,8 @@ import {
 	IUpdate,
 	IDelete,
 } from '../helpers/interfaces/controller.interfaces';
-import Model from '../models/staff.model';
-import { staff } from '@prisma/client';
+import Model from '../models/offices.model';
+import { offices } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
 
 class Controller
@@ -19,7 +19,7 @@ class Controller
 		IDelete<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: staff = req.body;
+		const body: offices = req.body;
 		const data: IResult = await Model.store(body);
 		res.status(data.status).json(data.result);
 	}
@@ -34,7 +34,7 @@ class Controller
 	}
 	async update(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const body: staff = req.body;
+		const body: offices = req.body;
 		const data: IResult = await Model.update(parseInt(id), body);
 		res.status(data.status).json(data.result);
 	}

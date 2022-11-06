@@ -8,7 +8,7 @@ import {
 	IDestroy,
 } from '../helpers/interfaces/repositories.interface';
 
-class contactRepository
+class Repository
 	implements
 		IStore<contact>,
 		IFindAll<contact>,
@@ -52,4 +52,4 @@ class contactRepository
 	}
 }
 
-export default new contactRepository();
+export default new Repository();
