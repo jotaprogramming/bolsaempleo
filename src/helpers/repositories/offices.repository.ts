@@ -1,4 +1,4 @@
-import prisma from '../config/db';
+import prisma from '../../config/db';
 import { offices } from '@prisma/client';
 import {
 	IFindAll,
@@ -6,7 +6,7 @@ import {
 	IUpdate,
 	IFindOne,
 	IDelete,
-} from '../helpers/interfaces/repositories.interface';
+} from '../interfaces/repositories.interface';
 
 class Repository
 	implements

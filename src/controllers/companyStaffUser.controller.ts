@@ -1,44 +1,18 @@
 import { Request, Response } from 'express';
 import { IStore, IDelete } from '../helpers/interfaces/controller.interfaces';
-import companiesStaffModel from '../models/companies_staff.model';
+import companiesStaffModel from '../models/companyStaffUser.model';
 import companiesModel from '../models/companies.model';
-import { companies_staff, companies, staff, users } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
-import { ICompanies } from '../helpers/interfaces/companies.interfaces';
+import { DTOCompanyStaffUser } from '../helpers/dto/companyStaffUser.dto';
 import staffModel from '../models/staff.model';
 import usersModel from '../models/users.model';
 
-class companies_staffController
+class Controller
 	implements IStore<Request, Response>, IDelete<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: ICompanies = req.body;
-		const company: companies = body.company;
-		const legal_representative: staff = body.legal_representative;
-		const human_resources: staff = body.human_resources;
-		const user: users = body.user;
-		const data1: IResult = await companiesStaffModel.store(
-			company,
-			user,
-			legal_representative
-		);
-		const data2: IResult = await companiesStaffModel.store(
-			company,
-			user,
-			human_resources
-		);
-		const data: IResult = {
-			status:
-				data1.status >= 400
-					? data1.status
-					: data2.status >= 400
-					? data2.status
-					: data1.status,
-			result: {
-				legal_representative: data1,
-				human_resources: data2,
-			},
-		};
+		const body: DTOCompanyStaffUser = req.body;
+		const data: IResult = await companiesStaffModel.store(body);
 		res.status(data.status).json(data.result);
 	}
 
@@ -97,4 +71,4 @@ class companies_staffController
 	}
 }
 
-export default new companies_staffController();
+export default new Controller();

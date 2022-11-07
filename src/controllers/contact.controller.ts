@@ -7,8 +7,8 @@ import {
 	IDestroy,
 } from '../helpers/interfaces/controller.interfaces';
 import Model from '../models/contact.model';
-import { contact } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
+import { IContactDTO } from '../helpers/interfaces/contact.interface';
 
 class Controller
 	implements
@@ -19,7 +19,7 @@ class Controller
 		IDestroy<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: contact = req.body;
+		const body: IContactDTO = req.body;
 		const data: IResult = await Model.store(body);
 		res.status(data.status).json(data.result);
 	}
@@ -34,7 +34,7 @@ class Controller
 	}
 	async update(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const body: contact = req.body;
+		const body: IContactDTO = req.body;
 		const data: IResult = await Model.update(parseInt(id), body);
 		res.status(data.status).json(data.result);
 	}

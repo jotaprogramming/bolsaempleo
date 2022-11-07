@@ -9,6 +9,7 @@ import {
 import Model from '../models/cities.model';
 import { cities } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
+import { DTOReqCity } from '../helpers/dto/city.dto';
 
 class Controller
 	implements
@@ -19,7 +20,7 @@ class Controller
 		IDestroy<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: cities = req.body;
+		const body: DTOReqCity = req.body;
 		const data: IResult = await Model.store(body);
 		res.status(data.status).json(data.result);
 	}
@@ -34,7 +35,7 @@ class Controller
 	}
 	async update(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const body: cities = req.body;
+		const body: DTOReqCity = req.body;
 		const data: IResult = await Model.update(parseInt(id), body);
 		res.status(data.status).json(data.result);
 	}

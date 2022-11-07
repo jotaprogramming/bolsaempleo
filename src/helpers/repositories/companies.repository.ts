@@ -1,4 +1,4 @@
-import prisma from '../config/db';
+import prisma from '../../config/db';
 import { companies } from '@prisma/client';
 import {
 	IFindAll,
@@ -6,21 +6,15 @@ import {
 	IUpdate,
 	IFindOne,
 	IDelete,
-} from '../helpers/interfaces/repositories.interface';
+} from '../interfaces/repositories.interface';
 
 class Repository
 	implements
-		IStore<companies>,
 		IFindAll<companies>,
 		IFindOne<number, companies>,
 		IUpdate<number, companies>,
 		IDelete<number, companies>
 {
-	async store(data: companies): Promise<companies> {
-		return await prisma.companies.create({
-			data: data,
-		});
-	}
 	async findAll(): Promise<Array<companies>> {
 		return await prisma.companies.findMany({
 			orderBy: {

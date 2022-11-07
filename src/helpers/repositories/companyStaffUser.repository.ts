@@ -1,4 +1,4 @@
-import prisma from '../config/db';
+import prisma from '../../config/db';
 import {
 	companies,
 	companies_staff,
@@ -6,7 +6,7 @@ import {
 	users,
 	users_companies,
 } from '@prisma/client';
-import '../helpers/middlewares/encrypt';
+import '../middlewares/encrypt';
 
 class Repository {
 	async store(
@@ -45,7 +45,15 @@ class Repository {
 				cs_com_nit: id,
 			},
 			include: {
-				companies: true,
+				companies: {
+					include: {
+						users_companies: {
+							include: {
+								users: true,
+							},
+						},
+					},
+				},
 				staff: true,
 			},
 		});

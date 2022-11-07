@@ -1,4 +1,4 @@
-import Repository from '../repositories/users.repository';
+import Repository from '../helpers/repositories/users.repository';
 import {
 	IFindAll,
 	IFindOne,

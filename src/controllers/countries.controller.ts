@@ -7,8 +7,8 @@ import {
 	IDestroy,
 } from '../helpers/interfaces/controller.interfaces';
 import Model from '../models/countries.model';
-import { countries } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
+import { DTOCountry } from '../helpers/dto/country.dto';
 
 class Controller
 	implements
@@ -19,13 +19,12 @@ class Controller
 		IDestroy<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: countries = req.body;
+		const body: DTOCountry = req.body;
 		const data: IResult = await Model.store(body);
 		res.status(data.status).json(data.result);
 	}
 	async findAll(_: Request, res: Response): Promise<void> {
 		const data: IResult = await Model.findAll();
-		// res.render('pages/countries/index', { result: result });
 		res.status(data.status).json(data.result);
 	}
 	async findOne(req: Request, res: Response): Promise<void> {
@@ -35,7 +34,7 @@ class Controller
 	}
 	async update(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const body: countries = req.body;
+		const body: DTOCountry = req.body;
 		const data: IResult = await Model.update(parseInt(id), body);
 		res.status(data.status).json(data.result);
 	}

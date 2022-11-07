@@ -1,6 +1,6 @@
 import { companies, staff, users } from '@prisma/client';
 
-export interface ICompanies {
+export interface DAOCompanyStaffUser {
 	company: companies;
 	user: users;
 	legal_representative: staff;

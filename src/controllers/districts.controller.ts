@@ -9,6 +9,7 @@ import {
 import Model from '../models/districts.model';
 import { district } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
+import { DTOReqDistrict } from '../helpers/dto/district.dto';
 
 class Controller
 	implements
@@ -19,13 +20,12 @@ class Controller
 		IDestroy<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: district = req.body;
+		const body: DTOReqDistrict = req.body;
 		const data: IResult = await Model.store(body);
 		res.status(data.status).json(data.result);
 	}
 	async findAll(_: Request, res: Response): Promise<void> {
 		const data: IResult = await Model.findAll();
-		// res.render('pages/district/index', { result: result });
 		res.status(data.status).json(data.result);
 	}
 	async findOne(req: Request, res: Response): Promise<void> {
@@ -35,7 +35,7 @@ class Controller
 	}
 	async update(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const body: district = req.body;
+		const body: DTOReqDistrict = req.body;
 		const data: IResult = await Model.update(parseInt(id), body);
 		res.status(data.status).json(data.result);
 	}

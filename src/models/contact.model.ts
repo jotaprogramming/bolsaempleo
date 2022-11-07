@@ -1,4 +1,4 @@
-import Repository from '../repositories/contact.repository';
+import Repository from '../helpers/repositories/contact.repository';
 import {
 	IFindAll,
 	IFindOne,
@@ -6,56 +6,34 @@ import {
 	IUpdate,
 	IDestroy,
 } from '../helpers/interfaces/model.interface';
-import { IResult } from '../helpers/interfaces/result.interface';
+import { IResult, IMessage } from '../helpers/interfaces/result.interface';
 import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
-import { contact } from '@prisma/client';
+import { contact, companies } from '@prisma/client';
 import verifyEmail from '../utils/email';
 import numberSize from '../utils/numberSize';
+import { IContactDTO } from '../helpers/interfaces/contact.interface';
+import { validateContact } from '../utils/validate';
+import contactMapper from '../helpers/mappers/contact.mapper';
 
 class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
-		IStore<contact>,
-		IUpdate<number, contact>,
+		IStore<IContactDTO>,
+		IUpdate<number, IContactDTO>,
 		IDestroy<number>
 {
-	async refactor(body: contact): Promise<contact | {}> {
-		const email: string = body.con_email;
-		const phone: number = body.con_phone;
-		const telephone: string = body.con_telephone;
-		const isEmail = verifyEmail(email);
-		if (!isEmail) {
-			return {
-				message: '¡El valor ingresado no es un correo electrónico!',
-				field: 'con_email',
-			};
-		}
-		const rangePhone = numberSize(phone, 7, 7);
-		if (rangePhone) {
-			return {
-				message: rangePhone,
-				field: 'con_phone',
-			};
-		}
-		const rangeTelephone = numberSize(telephone, 10, 10);
-		if (rangeTelephone) {
-			return {
-				message: rangeTelephone,
-				field: 'con_telephone',
-			};
-		}
-		return body;
-	}
-	async store(body: contact): Promise<IResult> {
+	async store(body: IContactDTO): Promise<IResult> {
 		try {
-			const data = await this.refactor(body);
+			const dataMap: contact = contactMapper.toPersistence(body);
+			const data: contact | IMessage = await validateContact(dataMap);
 			if ('message' in data) {
 				return HTTPResponse(200, data);
 			}
-			const result: contact = await Repository.store(body);
-			return HTTPResponse(201, result);
+			const result: contact = await Repository.store(data);
+			const dataDTO: IContactDTO = contactMapper.toDTO(result);
+			return HTTPResponse(201, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -66,7 +44,10 @@ class Model
 			if (result.length === 0) {
 				return HTTPResponse(204);
 			}
-			return HTTPResponse(200, result);
+			const dataDTO: Array<IContactDTO> = result.map((item) => {
+				return contactMapper.toDTO(item);
+			});
+			return HTTPResponse(200, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -77,22 +58,25 @@ class Model
 			if (!result) {
 				return HTTPResponse(204);
 			}
-			return HTTPResponse(200, result);
+			const dataDTO: IContactDTO = contactMapper.toDTO(result);
+			return HTTPResponse(200, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}
 	}
-	async update(id: number, body: contact): Promise<IResult> {
+	async update(id: number, body: IContactDTO): Promise<IResult> {
 		try {
-			const data = await this.refactor(body);
+			const dataMap: contact = contactMapper.toPersistence(body);
+			const data: contact | IMessage = await validateContact(dataMap);
 			if ('message' in data) {
 				return HTTPResponse(200, data);
 			}
-			const result: contact = await Repository.update(id, body);
+			const result: contact = await Repository.update(id, data);
 			if (Object.keys(result).length === 0) {
 				return HTTPResponse(204);
 			}
-			return HTTPResponse(201, result);
+			const dataDTO: IContactDTO = contactMapper.toDTO(result);
+			return HTTPResponse(201, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -100,7 +84,8 @@ class Model
 	async destroy(id: number): Promise<IResult> {
 		try {
 			const result: contact = await Repository.destroy(id);
-			return HTTPResponse(204, result);
+			const dataDTO: IContactDTO = contactMapper.toDTO(result);
+			return HTTPResponse(204, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}

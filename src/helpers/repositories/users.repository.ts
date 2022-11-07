@@ -1,13 +1,13 @@
-import prisma from '../config/db';
+import prisma from '../../config/db';
 import {
 	IFindAll,
 	IStore,
 	IUpdate,
 	IFindOne,
 	IDelete,
-} from '../helpers/interfaces/repositories.interface';
+} from '../interfaces/repositories.interface';
 import { users } from '@prisma/client';
-import '../helpers/middlewares/encrypt';
+import '../middlewares/encrypt';
 
 class Repository
 	implements
@@ -42,8 +42,8 @@ class Repository
 				username: 'asc',
 			},
 			include: {
-				roles: true
-			}
+				roles: true,
+			},
 		});
 	}
 	async findOne(id: number): Promise<users | null> {
@@ -52,8 +52,8 @@ class Repository
 				usr_id: id,
 			},
 			include: {
-				roles: true
-			}
+				roles: true,
+			},
 		});
 	}
 	async update(id: number, data: users): Promise<users> {
@@ -62,7 +62,7 @@ class Repository
 				usr_id: id,
 			},
 			include: {
-				roles: true
+				roles: true,
 			},
 			data: data,
 		});

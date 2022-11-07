@@ -1,4 +1,4 @@
-import prisma from '../config/db';
+import prisma from '../../config/db';
 import { district } from '@prisma/client';
 import {
 	IFindAll,
@@ -6,7 +6,8 @@ import {
 	IUpdate,
 	IFindOne,
 	IDestroy,
-} from '../helpers/interfaces/repositories.interface';
+} from '../interfaces/repositories.interface';
+import { TDistrict } from '../types/district.type';
 
 class Repository
 	implements
@@ -16,12 +17,15 @@ class Repository
 		IUpdate<number, district>,
 		IDestroy<number, district>
 {
-	async store(data: district): Promise<district> {
+	async store(data: district): Promise<TDistrict> {
 		return await prisma.district.create({
 			data: data,
+			include: {
+				countries: true,
+			},
 		});
 	}
-	async findAll(): Promise<Array<district>> {
+	async findAll(): Promise<Array<TDistrict>> {
 		return await prisma.district.findMany({
 			orderBy: {
 				dis_name: 'asc',
@@ -31,7 +35,7 @@ class Repository
 			},
 		});
 	}
-	async findOne(id: number): Promise<district | null> {
+	async findOne(id: number): Promise<TDistrict | null> {
 		return await prisma.district.findUnique({
 			where: {
 				dis_id: id,
@@ -41,7 +45,7 @@ class Repository
 			},
 		});
 	}
-	async update(id: number, data: district): Promise<district> {
+	async update(id: number, data: district): Promise<TDistrict> {
 		return await prisma.district.update({
 			where: {
 				dis_id: id,
@@ -52,7 +56,7 @@ class Repository
 			data: data,
 		});
 	}
-	async destroy(id: number): Promise<district> {
+	async destroy(id: number): Promise<TDistrict> {
 		return await prisma.district.delete({
 			where: {
 				dis_id: id,

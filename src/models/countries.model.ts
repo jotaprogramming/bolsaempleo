@@ -1,4 +1,4 @@
-import Repository from '../repositories/countries.repository';
+import Repository from '../helpers/repositories/countries.repository';
 import {
 	IFindAll,
 	IFindOne,
@@ -11,20 +11,24 @@ import typeError from '../utils/error';
 import HTTPResponse from '../utils/httpResponse';
 import { countries } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
+import { DTOCountry } from '../helpers/dto/country.dto';
+import countryMapper from '../helpers/mappers/country.mapper';
 
 class Model
 	implements
 		IFindAll<IResult>,
 		IFindOne<number>,
-		IStore<countries>,
-		IUpdate<number, countries>,
+		IStore<DTOCountry>,
+		IUpdate<number, DTOCountry>,
 		IDestroy<number>
 {
-	async store(body: countries): Promise<IResult> {
+	async store(body: DTOCountry): Promise<IResult> {
 		try {
-			const data: countries = await objectCapitalize(body);
+			const dataMap: countries = countryMapper.toPersistence(body);
+			const data: countries = await objectCapitalize(dataMap);
 			const result: countries = await Repository.store(data);
-			return HTTPResponse(201, result);
+			const dataDTO: DTOCountry = countryMapper.toDTO(result);
+			return HTTPResponse(201, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -35,7 +39,10 @@ class Model
 			if (result.length === 0) {
 				return HTTPResponse(204);
 			}
-			return HTTPResponse(200, result);
+			const dataDTO: Array<DTOCountry> = result.map((item) => {
+				return countryMapper.toDTO(item);
+			});
+			return HTTPResponse(200, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -46,19 +53,22 @@ class Model
 			if (!result) {
 				return HTTPResponse(204);
 			}
-			return HTTPResponse(200, result);
+			const dataDTO: DTOCountry = countryMapper.toDTO(result);
+			return HTTPResponse(200, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}
 	}
-	async update(id: number, body: countries): Promise<IResult> {
+	async update(id: number, body: DTOCountry): Promise<IResult> {
 		try {
-			const data: countries = await objectCapitalize(body);
+			const dataMap: countries = countryMapper.toPersistence(body);
+			const data: countries = await objectCapitalize(dataMap);
 			const result: countries = await Repository.update(id, data);
 			if (Object.keys(result).length === 0) {
 				return HTTPResponse(204);
 			}
-			return HTTPResponse(201, result);
+			const dataDTO: DTOCountry = countryMapper.toDTO(result);
+			return HTTPResponse(201, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}
@@ -66,7 +76,8 @@ class Model
 	async destroy(id: number): Promise<IResult> {
 		try {
 			const result: countries = await Repository.destroy(id);
-			return HTTPResponse(204, result);
+			const dataDTO: DTOCountry = countryMapper.toDTO(result);
+			return HTTPResponse(204, dataDTO);
 		} catch (error: any) {
 			return typeError(error);
 		}

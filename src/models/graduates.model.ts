@@ -1,4 +1,4 @@
-import Repository from '../repositories/graduates.repository';
+import Repository from '../helpers/repositories/graduates.repository';
 import {
 	IFindAll,
 	IFindOne,
