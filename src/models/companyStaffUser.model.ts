@@ -38,6 +38,10 @@ class Model {
 			await Repository.store(company, user, humanResource);
 			return HTTPResponse(201);
 		} catch (error: any) {
+			console.log(
+				'🚀 ~ file: companyStaffUser.model.ts ~ line 41 ~ Model ~ store ~ error',
+				error
+			);
 			return typeError(error);
 		}
 	}

@@ -2,14 +2,12 @@ import { Request, Response } from 'express';
 import {
 	IFindAll,
 	IFindOne,
-	IStore,
 	IUpdate,
 	IDelete,
 } from '../helpers/interfaces/controller.interfaces';
 import Model from '../models/companies.model';
-import { companies } from '@prisma/client';
 import { IResult } from '../helpers/interfaces/result.interface';
-import { DTOCompany } from '../helpers/dto/company.dto';
+import { DTOResCompany } from '../helpers/dto/company.dto';
 
 class Controller
 	implements
@@ -29,7 +27,7 @@ class Controller
 	}
 	async update(req: Request, res: Response): Promise<void> {
 		const id: string = req.params.id;
-		const body: DTOCompany = req.body;
+		const body: DTOResCompany = req.body;
 		const data: IResult = await Model.update(parseInt(id), body);
 		res.status(data.status).json(data.result);
 	}

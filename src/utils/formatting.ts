@@ -14,15 +14,15 @@ export function capitalize(str: string) {
 	return new_str.join(' ');
 }
 
-export async function objectCapitalize(body: any): Promise<any> {
+export async function objectCapitalize(body: {}): Promise<any> {
 	const temp_body: any = body;
 	const values = Object.values(body);
 	const keys = Object.keys(body);
 	const temp_values = values.map((item) => {
-		if (typeof item == 'string') {
+		if (typeof item === 'string') {
 			return capitalize(item);
 		}
-		if (typeof item == 'object') {
+		if (typeof item === 'object' && item !== null) {
 			return objectCapitalize(item);
 		}
 		return item;

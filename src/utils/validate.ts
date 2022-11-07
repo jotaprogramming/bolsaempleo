@@ -1,9 +1,8 @@
 import { contact, staff } from '@prisma/client';
 import verifyEmail from './email';
 import { objectCapitalize } from './formatting';
-import { IMessage, IResult } from '../helpers/interfaces/result.interface';
+import { IMessage } from '../helpers/interfaces/result.interface';
 import numberSize from './numberSize';
-import { IContactDTO } from '../helpers/interfaces/contact.interface';
 
 export async function validateStaff(body: staff): Promise<staff | IMessage> {
 	const data: staff = body;
@@ -15,7 +14,7 @@ export async function validateStaff(body: staff): Promise<staff | IMessage> {
 	if (!isEmail) {
 		return {
 			message: `¡El valor (${data.stf_email}) ingresado no es un correo electrónico!`,
-			field: 'stf_email',
+			field: 'email',
 		};
 	}
 	const rangePhone = numberSize(data.stf_telephone, 7, 10);
