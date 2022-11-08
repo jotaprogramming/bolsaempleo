@@ -1,9 +1,12 @@
 import { companies, staff, users } from '@prisma/client';
 import { DAOCompanyStaffUser } from '../dao/companyStaffUser.dao';
-import { DTOCompanyStaffUser } from '../dto/companyStaffUser.dto';
+import {
+	DTOReqCompanyStaffUser,
+	DTOResCompanyStaffUser,
+} from '../dto/companyStaffUser.dto';
 
 class Mapper {
-	toPersistence(data: DTOCompanyStaffUser): DAOCompanyStaffUser {
+	toPersistence(data: DTOReqCompanyStaffUser): DAOCompanyStaffUser {
 		return {
 			company: {
 				com_nit: data.nit,
@@ -56,7 +59,7 @@ class Mapper {
 		user: users,
 		rep: staff,
 		staff: staff
-	): DTOCompanyStaffUser {
+	): DTOReqCompanyStaffUser {
 		return {
 			nit: company.com_nit,
 			companyName: company.com_name,

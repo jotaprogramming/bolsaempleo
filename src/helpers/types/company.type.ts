@@ -9,12 +9,7 @@ import {
 	users,
 	users_companies,
 } from '@prisma/client';
-
-type ICompaniesStaff = companies_staff & {
-	staff: staff & {
-		job_title: job_title;
-	};
-};
+import { TStaff } from './staff.type';
 
 export type TCompany = companies & {
 	cities: cities & {
@@ -23,9 +18,7 @@ export type TCompany = companies & {
 		};
 	};
 	companies_staff: (companies_staff & {
-		staff: staff & {
-			job_title: job_title;
-		};
+		staff: TStaff;
 	})[];
 	users_companies: (users_companies & {
 		users: users;

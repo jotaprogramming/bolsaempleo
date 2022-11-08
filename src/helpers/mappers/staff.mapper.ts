@@ -1,8 +1,15 @@
 import { staff } from '@prisma/client';
-import { DTOHumanResource, DTOLegalRepresentative } from '../dto/staff.dto';
+import {
+	DTOReqHumanResource,
+	DTOReqLegalRepresentative,
+	DTOResHumanResource,
+	DTOResLegalRepresentative,
+} from '../dto/staff.dto';
+import { TStaff } from '../types/staff.type';
+import jobTitleMapper from './jobTitle.mapper';
 
 class Mapper {
-	toDTOHumanResource(data: staff): DTOHumanResource {
+	toDTOHumanResource(data: TStaff): DTOResHumanResource {
 		return {
 			contractorId: data.stf_id,
 			contractorCed: data.stf_ced,
@@ -10,13 +17,13 @@ class Mapper {
 			contractorLastname: data.stf_lastname,
 			contractorTelephone: data.stf_telephone,
 			contractorEmail: data.stf_email,
-			contractorJobTitle: data.stf_jt_id,
+			contractorJobTitle: jobTitleMapper.toDTO(data.job_title),
 			contractorCreatedAt: data.stf_created_at,
 			contractorUpdatedAt: data.stf_updated_at!,
 			contractorDeletedAt: data.stf_deleted_at!,
 		};
 	}
-	toDTOLegalRepresentative(data: staff): DTOLegalRepresentative {
+	toDTOLegalRepresentative(data: TStaff): DTOResLegalRepresentative {
 		return {
 			repId: data.stf_id,
 			repCed: data.stf_ced,
@@ -24,7 +31,7 @@ class Mapper {
 			repLastname: data.stf_lastname,
 			repTelephone: data.stf_telephone,
 			repEmail: data.stf_email,
-			repJobTitle: data.stf_jt_id,
+			repJobTitle: jobTitleMapper.toDTO(data.job_title),
 			repCreatedAt: data.stf_created_at,
 			repUpdatedAt: data.stf_updated_at!,
 			repDeletedAt: data.stf_deleted_at!,

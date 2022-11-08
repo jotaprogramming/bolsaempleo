@@ -11,12 +11,12 @@ import {
 } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
 import { validateStaff } from '../utils/validate';
-import { DTOCompanyStaffUser } from '../helpers/dto/companyStaffUser.dto';
+import { DTOResCompanyStaffUser } from '../helpers/dto/companyStaffUser.dto';
 import companiesMapper from '../helpers/mappers/companyStaffUser.mapper';
 import { DAOCompanyStaffUser } from '../helpers/dao/companyStaffUser.dao';
 
 class Model {
-	async store(data: DTOCompanyStaffUser): Promise<IResult> {
+	async store(data: DTOResCompanyStaffUser): Promise<IResult> {
 		try {
 			const dataMap: DAOCompanyStaffUser =
 				companiesMapper.toPersistence(data);

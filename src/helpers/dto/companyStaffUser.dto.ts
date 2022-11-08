@@ -1,9 +1,20 @@
 import { DTOUser } from './user.dto';
-import { DTOLegalRepresentative, DTOHumanResource } from './staff.dto';
-import { DTOCompany } from './company.dto';
+import {
+	DTOResLegalRepresentative,
+	DTOResHumanResource,
+	DTOReqHumanResource,
+	DTOReqLegalRepresentative,
+} from './staff.dto';
+import { DTOReqCompany, DTOResCompany } from './company.dto';
 
-export interface DTOCompanyStaffUser
-	extends DTOCompany,
+export interface DTOResCompanyStaffUser
+	extends DTOResCompany,
 		DTOUser,
-		DTOLegalRepresentative,
-		DTOHumanResource {}
+		DTOResLegalRepresentative,
+		DTOResHumanResource {}
+
+export interface DTOReqCompanyStaffUser
+	extends DTOReqCompany,
+		DTOUser,
+		DTOReqLegalRepresentative,
+		DTOReqHumanResource {}
