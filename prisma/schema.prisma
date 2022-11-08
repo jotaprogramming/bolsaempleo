@@ -11,7 +11,7 @@ model candidatures {
   cdt_id         Int                      @id @default(autoincrement())
   cdt_ofr_id     Int
   cdt_grd_ced    Int
-  cdt_status     candidatures_cdt_status?
+  cdt_status     candidatures_cdt_status? @default(En_proceso)
   cdt_created_at DateTime                 @default(now()) @db.Timestamp(0)
   cdt_updated_at DateTime?                @db.Timestamp(0)
   cdt_deleted_at DateTime?                @db.Timestamp(0)
@@ -108,6 +108,7 @@ model graduates {
   grd_sec_name    String?           @db.VarChar(50)
   grd_fir_surname String            @db.VarChar(50)
   grd_sec_surname String            @db.VarChar(50)
+  grd_telephone   String            @db.VarChar(11)
   grd_email       String            @db.VarChar(100)
   grd_off_id      Int
   grd_cty_id      Int
@@ -146,7 +147,7 @@ model offers {
   salary          String          @db.VarChar(100)
   ofr_crr_id      Int
   vacancies       Int             @default(1)
-  modality        offers_modality
+  modality        offers_modality @default(Flexible)
   hiring          DateTime        @db.Date
   ofr_ct_id       Int?
   ofr_wd_id       Int?
@@ -204,10 +205,10 @@ model roles_restrictions {
 }
 
 model social_networks {
-  sn_id      Int          @id @default(autoincrement())
-  sn_name    String       @unique(map: "sn_name") @db.VarChar(100)
-  sn_icon    Bytes        @db.TinyBlob
-  contact_sn contact_sn[]
+  sn_id        Int          @id @default(autoincrement())
+  sn_name      String       @unique(map: "sn_name") @db.VarChar(100)
+  sn_icon_path String       @db.VarChar(100)
+  contact_sn   contact_sn[]
 }
 
 model tags {
@@ -218,7 +219,7 @@ model tags {
 
 model users {
   usr_id          Int               @id @default(autoincrement())
-  username        String            @unique(map: "username") @db.VarChar(50)
+  username        String            @unique(map: "username") @db.VarChar(20)
   email           String            @unique(map: "email") @db.VarChar(100)
   password        String            @db.VarChar(255)
   about_me        String?           @db.VarChar(255)

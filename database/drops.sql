@@ -1,4 +1,5 @@
 -- Active: 1659019681460@@127.0.0.1@3306@jobcenter
+DROP DATABASE jobcenter; 
 DROP TABLE IF EXISTS countries;
 DROP TABLE IF EXISTS district;
 DROP TABLE IF EXISTS cities;

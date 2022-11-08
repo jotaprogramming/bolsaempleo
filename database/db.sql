@@ -111,7 +111,7 @@ CREATE TABLE offers(
     salary VARCHAR(100) NOT NULL,
     ofr_crr_id INT NOT NULL COMMENT 'Currency ID',
     vacancies INT NOT NULL DEFAULT 1 COMMENT 'Number of vacancies available for the offer',
-    modality ENUM('Presencial', 'Remoto', 'Flexible') NOT NULL,
+    modality ENUM('Presencial', 'Remoto', 'Flexible') NOT NULL DEFAULT 'Flexible',
     hiring DATE NOT NULL COMMENT 'Date of hire',
     ofr_ct_id INT NULL COMMENT 'Contract Type Id',
     ofr_wd_id INT NULL COMMENT 'Workday Id',
@@ -141,7 +141,7 @@ DROP TABLE IF EXISTS social_networks;
 CREATE TABLE social_networks(
     sn_id INT PRIMARY KEY AUTO_INCREMENT,
     sn_name VARCHAR(100) NOT NULL UNIQUE,
-    sn_icon TINYBLOB NOT NULL COMMENT 'Social network icon'
+    sn_icon_path VARCHAR(100) NOT NULL COMMENT 'Social network icon path'
 );
 
 DROP TABLE IF EXISTS contact;
@@ -186,6 +186,7 @@ CREATE TABLE graduates(
     grd_sec_name VARCHAR(50) NULL COMMENT 'Second names',
     grd_fir_surname VARCHAR(50) NOT NULL COMMENT 'First surname',
     grd_sec_surname VARCHAR(50) NOT NULL COMMENT 'Second surname',
+    grd_telephone VARCHAR(11) NOT NULL,
     grd_email VARCHAR(100) NOT NULL COMMENT 'Institutional email',
     grd_off_id INT NOT NULL COMMENT 'offices Id',
     grd_cty_id INT NOT NULL COMMENT 'City Id',
@@ -226,7 +227,7 @@ CREATE TABLE candidatures(
     cdt_id INT PRIMARY KEY AUTO_INCREMENT,
     cdt_ofr_id INT NOT NULL COMMENT 'Offer Id',
     cdt_grd_ced INT NOT NULL COMMENT 'Graduate Id',
-    cdt_status ENUM('En proceso', 'En espera', 'Contratado', 'Rechazado') COMMENT 'Candidate status during the recruitment process',
+    cdt_status ENUM('En proceso', 'En espera', 'Contratado', 'Rechazado') DEFAULT 'En proceso' COMMENT 'Candidate status during the recruitment process',
     cdt_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     cdt_updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     cdt_deleted_at TIMESTAMP NULL,
@@ -238,7 +239,7 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
     usr_id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL UNIQUE,
+    username VARCHAR(20) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     about_me VARCHAR(255) NULL,
