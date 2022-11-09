@@ -15,3 +15,5 @@ class Server extends App {
 }
 
 new Server().listen();
+
+export default new Server;

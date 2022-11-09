@@ -17,7 +17,6 @@ import settingRoutes from './settings.routes';
  * to.
  */
 const router = (app: Express) => {
-	app.use(indexRoutes);
 	app.use('/', userRoutes);
 	app.use('/countries', countryRoutes);
 	app.use('/districts', districtsRoutes);
