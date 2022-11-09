@@ -1,0 +1,20 @@
+<section class="container__card__form">
+    <!--------------------CARD HEADER---------------->
+    <div class="container__card__form__header">
+        <h2 class="container__card__form__header__title"><%= headline %></h2>
+        <h2 class="container__card__form__header__subtitle"><%= subtitle %></h2>
+    </div>
+    <!--------------------CARD BODY---------------->
+    <div class="container__card__form__body">
+        <div class="container__card__form__body__text">
+            <%= warning %> 
+        </div>
+        <%- include('_login') %>
+    </div>
+    <div class="container__card__form__footer" style="flex-direction: column;">
+        <p class="container__card__form__footer__text">
+            Si aún no tiene un usuario y contraseña
+        </p>
+        <p class="container__card__form__footer__text">regístrese <b><a href="#">AQUÍ</a></b></p>
+    </div>
+</section>

@@ -110,4 +110,5 @@ dist
 drawings/MVC.drawio
 
 # Temporal
-src/tests/
+# src/tests/
+components

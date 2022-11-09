@@ -40,6 +40,10 @@ Juan Rincón
 
 ## Development guide
 
+### MVC
+
+![mvc](./drawings/MVC.svg)
+
 ### Folder structure
 
 ```bash
@@ -89,7 +93,7 @@ src ────┐
 
 [![express](https://img.shields.io/badge/Express-v4.18.2-yellow)](https://github.com/expressjs/express)
 [![ejs](https://img.shields.io/badge/EJS-v3.1.8-green)](https://github.com/expressjs/express)
-[![prisma](https://img.shields.io/badge/PrismaClient-v4.5.0-blue)](https://github.com/prisma/prisma)
+[![prisma](https://img.shields.io/badge/PrismaClient-v4.6.0-blue)](https://github.com/prisma/prisma)
 
 ## Commands
 
