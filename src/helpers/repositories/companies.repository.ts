@@ -14,7 +14,7 @@ class Repository
 		IFindAll<TCompany>,
 		IFindOne<number, TCompany>,
 		IUpdate<number, TCompany>,
-		IDelete<number, TCompany>
+		IDelete<number, companies>
 {
 	async findAll(): Promise<Array<TCompany>> {
 		return await prisma.companies.findMany({
@@ -115,7 +115,7 @@ class Repository
 			data: data,
 		});
 	}
-	async delete(id: number): Promise<TCompany> {
+	async delete(id: number): Promise<companies> {
 		return await prisma.companies.update({
 			where: {
 				com_nit: id,
@@ -128,20 +128,6 @@ class Repository
 								countries: true,
 							},
 						},
-					},
-				},
-				companies_staff: {
-					include: {
-						staff: {
-							include: {
-								job_title: true,
-							},
-						},
-					},
-				},
-				users_companies: {
-					include: {
-						users: true,
 					},
 				},
 			},

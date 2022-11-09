@@ -3,7 +3,11 @@ import { IStore, IDelete } from '../helpers/interfaces/controller.interfaces';
 import companiesStaffModel from '../models/companyStaffUser.model';
 import companiesModel from '../models/companies.model';
 import { IResult } from '../helpers/interfaces/result.interface';
-import { DTOResCompanyStaffUser } from '../helpers/dto/companyStaffUser.dto';
+import {
+	DTOCompanyStaffUser,
+	DTOReqCompanyStaffUser,
+	// DTOResCompanyStaffUser,
+} from '../helpers/dto/companyStaffUser.dto';
 import staffModel from '../models/staff.model';
 import usersModel from '../models/users.model';
 
@@ -11,7 +15,7 @@ class Controller
 	implements IStore<Request, Response>, IDelete<Request, Response>
 {
 	async store(req: Request, res: Response): Promise<void> {
-		const body: DTOResCompanyStaffUser = req.body;
+		const body: DTOReqCompanyStaffUser = req.body;
 		const data: IResult = await companiesStaffModel.store(body);
 		res.status(data.status).json(data.result);
 	}

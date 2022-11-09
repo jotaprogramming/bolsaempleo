@@ -1,5 +1,6 @@
 import { DTOResCity } from './city.dto';
-import { DTOResHumanResource, DTOResLegalRepresentative } from './staff.dto';
+import { DTOResStaff } from './staff.dto';
+// import { DTOResHumanResource, DTOResLegalRepresentative } from './staff.dto';
 import { DTOUser } from './user.dto';
 
 interface DTOCompany {
@@ -17,9 +18,6 @@ export interface DTOReqCompany extends DTOCompany {
 
 export interface DTOResCompany extends DTOCompany {
 	city: DTOResCity;
-	user: DTOUser;
-	staff: {
-		legalRepresentative: DTOResLegalRepresentative;
-		humanResource: DTOResHumanResource;
-	};
+	// user: DTOUser;
+	// staff: DTOResStaff[];
 }

@@ -63,9 +63,9 @@ class Model
 	}
 	async delete(id: number): Promise<IResult> {
 		try {
-			const result: TCompany = await Repository.delete(id);
-			const dataDTO: DTOResCompany = companyMapper.toDTO(result);
-			return HTTPResponse(200, dataDTO);
+			const result: companies = await Repository.delete(id);
+			// const dataDTO: DTOResCompany = companyMapper.toDTO(result);
+			return HTTPResponse(200, result);
 		} catch (error: any) {
 			return typeError(error);
 		}

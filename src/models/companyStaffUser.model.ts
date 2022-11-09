@@ -11,37 +11,32 @@ import {
 } from '@prisma/client';
 import { objectCapitalize } from '../utils/formatting';
 import { validateStaff } from '../utils/validate';
-import { DTOResCompanyStaffUser } from '../helpers/dto/companyStaffUser.dto';
+import {
+	DTOCompanyStaffUser,
+	DTOReqCompanyStaffUser,
+	DTOResCompanyStaffUser,
+} from '../helpers/dto/companyStaffUser.dto';
 import companiesMapper from '../helpers/mappers/companyStaffUser.mapper';
 import { DAOCompanyStaffUser } from '../helpers/dao/companyStaffUser.dao';
 
 class Model {
-	async store(data: DTOResCompanyStaffUser): Promise<IResult> {
+	async store(data: DTOReqCompanyStaffUser): Promise<IResult> {
 		try {
 			const dataMap: DAOCompanyStaffUser =
 				companiesMapper.toPersistence(data);
 			const company: companies = await objectCapitalize(dataMap.company);
 			const user: users = dataMap.user;
-			const legalRepresentative: staff | IMessage = await validateStaff(
-				dataMap.legal_representative
-			);
-			if ('message' in legalRepresentative) {
-				return HTTPResponse(200, legalRepresentative);
+			for (let i = 0; i < dataMap.staff.length; i++) {
+				const result: staff | IMessage = await validateStaff(
+					dataMap.staff[i]
+				);
+				if ('message' in result) {
+					return HTTPResponse(200, result);
+				}
+				await Repository.store(company, user, result);
 			}
-			const humanResource: staff | IMessage = await validateStaff(
-				dataMap.human_resources
-			);
-			if ('message' in humanResource) {
-				return HTTPResponse(200, humanResource);
-			}
-			await Repository.store(company, user, legalRepresentative);
-			await Repository.store(company, user, humanResource);
 			return HTTPResponse(201);
 		} catch (error: any) {
-			console.log(
-				'🚀 ~ file: companyStaffUser.model.ts ~ line 41 ~ Model ~ store ~ error',
-				error
-			);
 			return typeError(error);
 		}
 	}

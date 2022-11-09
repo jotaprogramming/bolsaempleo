@@ -8,6 +8,6 @@ router.get('/', controller.findAll);
 router.post('/', controllerCompanyStaffUser.store);
 router.get('/:id', controller.findOne);
 router.put('/:id', controller.update);
-router.post('/:id', controller.delete);
+router.post('/:id', controllerCompanyStaffUser.delete);
 
 export default router;

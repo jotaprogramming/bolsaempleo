@@ -1,41 +1,62 @@
 import { DTOJobTitle } from './jobTitle.dto';
 
-interface DTOHumanResource {
-	contractorId?: number;
-	contractorCed: number;
-	contractorName: string;
-	contractorLastname: string;
-	contractorTelephone: string;
-	contractorEmail: string;
-	contractorCreatedAt?: Date;
-	contractorUpdatedAt?: Date;
-	contractorDeletedAt?: Date;
+interface DTOStaff {
+	id: number;
+	idCard: number;
+	telephone: string;
+	email: string;
+	createdAt?: Date;
+	updatedAt?: Date;
+	deletedAt?: Date;
 }
 
-interface DTOLegalRepresentative {
-	repId?: number;
-	repCed: number;
-	repName: string;
-	repLastname: string;
-	repTelephone: string;
-	repEmail: string;
-	repCreatedAt?: Date;
-	repUpdatedAt?: Date;
-	repDeletedAt?: Date;
+export interface DTOResStaff extends DTOStaff {
+	fullname: string;
+	jobTitle: DTOJobTitle;
 }
 
-export interface DTOResHumanResource extends DTOHumanResource {
-	contractorJobTitle: DTOJobTitle;
+export interface DTOReqStaff extends DTOStaff {
+	name: string;
+	lastname: string;
+	jobTitle: number;
 }
 
-export interface DTOResLegalRepresentative extends DTOLegalRepresentative {
-	repJobTitle: DTOJobTitle;
-}
+// interface DTOHumanResource {
+// 	contractorId?: number;
+// 	contractorCed: number;
+// 	contractorName: string;
+// 	contractorLastname: string;
+// 	contractorTelephone: string;
+// 	contractorEmail: string;
+// 	contractorCreatedAt?: Date;
+// 	contractorUpdatedAt?: Date;
+// 	contractorDeletedAt?: Date;
+// }
 
-export interface DTOReqHumanResource extends DTOHumanResource {
-	contractorJobTitle: number;
-}
+// interface DTOLegalRepresentative {
+// 	repId?: number;
+// 	repCed: number;
+// 	repName: string;
+// 	repLastname: string;
+// 	repTelephone: string;
+// 	repEmail: string;
+// 	repCreatedAt?: Date;
+// 	repUpdatedAt?: Date;
+// 	repDeletedAt?: Date;
+// }
 
-export interface DTOReqLegalRepresentative extends DTOLegalRepresentative {
-	repJobTitle: number;
-}
+// interface DTOResHumanResource extends DTOHumanResource {
+// 	contractorJobTitle: DTOJobTitle;
+// }
+
+// interface DTOResLegalRepresentative extends DTOLegalRepresentative {
+// 	repJobTitle: DTOJobTitle;
+// }
+
+// interface DTOReqHumanResource extends DTOHumanResource {
+// 	contractorJobTitle: number;
+// }
+
+// interface DTOReqLegalRepresentative extends DTOLegalRepresentative {
+// 	repJobTitle: number;
+// }
