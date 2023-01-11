@@ -34,7 +34,7 @@
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.11.18",
     "@types/supertest": "^2.0.12",
-    "prettier": "2.7.1",
+    "prettier": "2.8.1",
     "prisma": "^4.8.0",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
