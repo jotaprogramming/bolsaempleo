@@ -16,6 +16,14 @@ date: "2022-30-10"
 
 Development of an employment exchange for a higher education institution, as a degree project for a systems engineering degree.
 
+## Project evolution
+
+This repository contains the first iteration of my Systems Engineering degree project. At this stage, I deliberately chose a stack I had not worked with before — TypeScript, Node.js, Express, EJS and Prisma — to explore a different approach to structuring the application and learn through the project.
+
+I was responsible for the software development. As the academic deadline approached, the project also required a substantial amount of degree documentation. Continuing to absorb the learning curve of the new stack while completing the product increased delivery risk, so I decided to rebuild the final version with Django, a framework that already solved several concerns that were still open and allowed me to focus on completing and delivering the project.
+
+The final degree-project version is available in [bolsaempleo2023](https://github.com/jotaprogramming/bolsaempleo2023). This repository remains public as the earlier technical iteration and as a record of the exploration that preceded the final delivery.
+
 ## Members
 
 Jerson Guerrero <jy.guerrero22@gmail.com>\
@@ -27,6 +35,7 @@ Juan Rincón
 
 - [:book: Job board](#book-job-board)
   - [Summary](#summary)
+  - [Project evolution](#project-evolution)
   - [Members](#members)
   - [Table of Contents](#table-of-contents)
   - [Development guide](#development-guide)
